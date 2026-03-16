@@ -1,1307 +1,1819 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <meta name="description" content="YieldSAT: A Multimodal Benchmark Dataset for High-Resolution Crop Yield Prediction">
-  <meta name="keywords" content="yield prediction, precision agriculture, remote sensing, combine harvester, Sentinel-2, deep learning, multimodal fusion">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-  <title>YieldSAT: A Multimodal Benchmark Dataset for High-Resolution Crop Yield Prediction</title>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="description"
+      content="YieldSAT: A Multimodal Benchmark Dataset for High-Resolution Crop Yield Prediction"
+    />
+    <meta
+      name="keywords"
+      content="yield prediction, precision agriculture, remote sensing, combine harvester, Sentinel-2, deep learning, multimodal fusion"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <title>
+      YieldSAT: A Multimodal Benchmark Dataset for High-Resolution Crop Yield
+      Prediction
+    </title>
 
-  <!-- Bulma CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-  
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="./static/css/index.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
 
-  <!-- Social Media Preview -->
-  <meta property="og:title" content="YieldSAT Dataset">
-  <meta property="og:description" content="Multimodal benchmark dataset for high-resolution crop yield prediction spanning multiple countries and crop types">
+    <!-- Bulma CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
 
-   <!-- MathJax for LaTeX rendering -->
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
 
-</head>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./static/css/index.css" />
 
-<body>
+    <!-- Social Media Preview -->
+    <meta property="og:title" content="YieldSAT Dataset" />
+    <meta
+      property="og:description"
+      content="Multimodal benchmark dataset for high-resolution crop yield prediction spanning multiple countries and crop types"
+    />
 
-<!-- Hero Section -->
-<section class="hero">
-  <div class="hero-body">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">
-            YieldSAT: A Multimodal Benchmark Dataset for High-Resolution Crop Yield Prediction
-          </h1>
-          
-          <!-- Authors -->
-          <div class="is-size-5 publication-authors">
-            <span class="author-block">
-              Anonymous CVPR Submission
-            </span>
-          </div>
+    <!-- MathJax for LaTeX rendering -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script
+      id="MathJax-script"
+      async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    ></script>
+  </head>
 
-          <!-- Affiliations -->
-          <div class="is-size-5 publication-authors">
-            <span class="author-block">Paper ID 40184</span>
-          </div>
+  <body>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-body">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered">
+            <div class="column has-text-centered">
+              <h1 class="title is-1 publication-title">
+                YieldSAT: A Multimodal Benchmark Dataset for High-Resolution
+                Crop Yield Prediction
+              </h1>
 
-          <!-- Conference -->
-          <div class="is-size-4 publication-venue">
-            <span class="venue-block">CVPR 2026 Submission</span>
-          </div>
+              <!-- Authors -->
+              <div class="is-size-5 publication-authors">
+                <span class="author-block">
+                  <a
+                    href="https://www.linkedin.com/in/miro-miranda-lorenz-b90a64199/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Miro Miranda Lorenz</a
+                  >,
+                </span>
+                <span class="author-block">
+                  <a
+                    href="https://dpkpathak.github.io/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Deepak Pathak</a
+                  >,
+                </span>
+                <span class="author-block">
+                  <a
+                    href="https://scholar.google.com/citations?user=Iilguc0AAAAJ&hl=en"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Patrick Helber</a
+                  >,
+                </span>
+                <span class="author-block">
+                  <a
+                    href="https://scholar.google.com/citations?user=OnVymDUAAAAJ&hl=en"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Benjamin Bischke</a
+                  >,
+                </span>
+                <span class="author-block">
+                  <a
+                    href="https://scholar.google.com/citations?user=lSy4X2MAAAAJ&hl=en"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Hiba Najjar</a
+                  >,
+                </span>
+                <br />
+                <span class="author-block">
+                  <a
+                    href="https://scholar.google.com/citations?user=jl736ssAAAAJ&hl=en"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Francisco Mena</a
+                  >,
+                </span>
+                <span class="author-block">
+                  <a
+                    href="https://www.linkedin.com/in/crivisan/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Cristhian Sanchez</a
+                  >,
+                </span>
 
-          <!-- Links -->
-          <div class="column has-text-centered">
-            <div class="publication-links">
-              <!-- Paper PDF -->
-              <span class="link-block">
-                <a href="#" target="_blank" class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon"><i class="fas fa-file-pdf"></i></span>
-                  <span>Paper</span>
-                </a>
-              </span>
-              <!-- ArXiv -->
-              <span class="link-block">
-                <a href="#" target="_blank" class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon"><i class="ai ai-arxiv"></i></span>
-                  <span>arXiv</span>
-                </a>
-              </span>
-              <!-- Dataset -->
-              <span class="link-block">
-                <a href="#" target="_blank" class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon"><i class="fas fa-database"></i></span>
-                  <span>Dataset</span>
-                </a>
-              </span>
-              <!-- Notebook -->
-               <span class="link-block">
-                <a href="#" target="_blank" rel="noopener noreferrer" class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                    <img src="static/images/colab.svg">
+                <span class="author-block">
+                  <a
+                    href="https://akshaypai20.github.io/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Akshay Pai</a
+                  >,
+                </span>
+
+                <span class="author-block">
+                  <a
+                    href="https://www.linkedin.com/in/darenasc/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Diego Arenas</a
+                  >,
+                </span>
+
+                <span class="author-block">
+                  <a
+                    href="https://mvaldenegro.github.io/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Matias Valdenegro Toro</a
+                  >,
+                </span>
+
+                <span class="author-block">
+                  <a
+                    href="https://www.researchgate.net/profile/Marcela-Charfuelan"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Marcela Charfualan</a
+                  >,
+                </span>
+
+                <span class="author-block">
+                  <a
+                    href="https://scholar.google.com/citations?user=1AOnUXIAAAAJ&hl=de"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Marlon Nuske</a
+                  >,
+                </span>
+
+                <span class="author-block">
+                  <a
+                    href="https://www.dfki.uni-kl.de/~dengel/indexEng.php"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Andreas Dengel</a
+                  >,
+                </span>
+              </div>
+
+              <!-- Affiliations -->
+              <div class="is-size-5 publication-authors">
+                <span class="author-block">RPTU Kaiserslautern-Landau, DFKI GmbH, Vision Impulse GmbH, University of Groningen</span>
+              </div>
+
+              <!-- Conference -->
+              <div class="is-size-4 publication-venue">
+                <span class="venue-block">CVPR 2026</span>
+              </div>
+
+              <!-- Links -->
+              <div class="column has-text-centered">
+                <div class="publication-links">
+                  <!-- Paper PDF -->
+                  <span class="link-block">
+                    <a
+                      href="#"
+                      target="_blank"
+                      class="external-link button is-normal is-rounded is-dark"
+                    >
+                      <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                      <span>Paper</span>
+                    </a>
                   </span>
-                  <span>&nbsp;Notebook</span>
-                </a>
-              </span>
+                  <!-- ArXiv -->
+                  <span class="link-block">
+                    <a
+                      href="#"
+                      target="_blank"
+                      class="external-link button is-normal is-rounded is-dark"
+                    >
+                      <span class="icon"><i class="ai ai-arxiv"></i></span>
+                      <span>arXiv</span>
+                    </a>
+                  </span>
+                  <!-- Dataset -->
+                  <span class="link-block">
+                    <a
+                      href="#"
+                      target="_blank"
+                      class="external-link button is-normal is-rounded is-dark"
+                    >
+                      <span class="icon"><i class="fas fa-database"></i></span>
+                      <span>Dataset</span>
+                    </a>
+                  </span>
+                  <!-- Notebook -->
+                  <span class="link-block">
+                    <a
+                      href="https://colab.research.google.com/drive/1N5dUDorm6EZl0DKZurL6IsBMvdVE_WGr"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="external-link button is-normal is-rounded is-dark"
+                    >
+                      <span class="icon">
+                        <img src="static/images/colab.svg" />
+                      </span>
+                      <span>&nbsp;Notebook</span>
+                    </a>
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- Teaser Image -->
-<section class="hero teaser">
-  <div class="container is-max-desktop">
-    <div class="hero-body">
-      <img src="./static/images/YieldSat_overview_scatch.jpg" alt="Dataset Overview" width="100%">
-      <h2 class="subtitle has-text-centered">
-        <strong>YieldSAT</strong> is the first multimodal dataset for crop yield prediction at both <strong>field and subfield (pixel) levels</strong>,
-        combining combine harvester yield data, Sentinel-2 time series, weather, soil, and topography information
-        across 4 countries, 4 crop types, and 9 years (2016-2024).
-      </h2>
-    </div>
-  </div>
-</section>
+    <!-- Teaser Image -->
+    <section class="hero teaser">
+      <div class="container is-max-desktop">
+        <div class="hero-body">
+          <img
+            src="./static/images/YieldSat_overview_scatch.jpg"
+            alt="Dataset Overview"
+            width="100%"
+          />
+          <h2 class="subtitle has-text-centered">
+            <strong>YieldSAT</strong> is the first multimodal dataset for crop
+            yield prediction at both
+            <strong>field and subfield (pixel) levels</strong>, combining
+            combine harvester yield data, Sentinel-2 time series, weather, soil,
+            and topography information across 4 countries, 4 crop types, and 9
+            years (2016-2024).
+          </h2>
+        </div>
+      </div>
+    </section>
 
-<!-- Abstract -->
-<section class="section">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
+    <!-- Abstract -->
+    <section class="section">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Abstract</h2>
+            <div class="content has-text-justified">
+              <p>
+                Crop yield prediction requires substantial data to train
+                data-driven models. However, creating yield prediction datasets
+                is constrained by high acquisition costs, heterogeneous data
+                quality, and data privacy regulations. Consequently, existing
+                datasets are scarce, low in quality, or limited to regional
+                levels or single crop types. In this work, we release
+                <strong>YieldSAT</strong>, a large, high-quality, and multimodal
+                dataset for high-resolution crop yield prediction. YieldSAT
+                spans various climate zones across two continents and multiple
+                countries, including Argentina, Brazil, Uruguay, and Germany.
+                The dataset was collected between 2016 and 2024 and comprises
+                four major crop types—corn, rapeseed, soybeans, and wheat—across
+                2,176 curated fields. In total, over 12.2 million yield samples
+                are available, each with a spatial resolution of 10 m. Each
+                field is paired with multispectral satellite imagery, resulting
+                in 113,630 labeled satellite images, complemented by auxiliary
+                environmental data. We demonstrate the potential of large-scale
+                and high-resolution crop yield prediction as an image regression
+                task by comparing various deep learning models and data fusion
+                architectures. Furthermore, we highlight open challenges arising
+                from severe distribution shifts in the ground truth data.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why YieldSAT Section -->
+    <section class="section">
+      <div class="container is-max-desktop">
+        <h2 class="title is-3 has-text-centered">Why YieldSAT?</h2>
+
         <div class="content has-text-justified">
           <p>
-            Crop yield prediction requires substantial data to train data-driven models. However, creating yield prediction
-            datasets is constrained by high acquisition costs, heterogeneous data quality, and data privacy regulations.
-            Consequently, existing datasets are scarce, low in quality, or limited to regional levels or single crop types.
-            In this work, we release <strong>YieldSAT</strong>, a large, high-quality, and multimodal dataset for high-resolution 
-            crop yield prediction. YieldSAT spans various climate zones across two continents and multiple countries, 
-            including Argentina, Brazil, Uruguay, and Germany. The dataset was collected between 2016 and 2024 and comprises 
-            four major crop types—corn, rapeseed, soybeans, and wheat—across 2,176 curated fields. In total, over 12.2 million 
-            yield samples are available, each with a spatial resolution of 10 m. Each field is paired with multispectral 
-            satellite imagery, resulting in 113,630 labeled satellite images, complemented by auxiliary environmental data. 
-            We demonstrate the potential of large-scale and high-resolution crop yield prediction as an image regression task 
-            by comparing various deep learning models and data fusion architectures. Furthermore, we highlight open challenges 
-            arising from severe distribution shifts in the ground truth data.
+            YieldSAT addresses critical gaps in crop yield prediction research
+            by providing the first comprehensive dataset designed for both
+            field-level and subfield (pixel-level) yield prediction. Unlike
+            existing datasets that are limited to single regions or crop types,
+            YieldSAT offers unprecedented diversity and scale.
           </p>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- Why YieldSAT Section -->
-<section class="section">
-  <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">Why YieldSAT?</h2>
-    
-    <div class="content has-text-justified">
-      <p>
-        YieldSAT addresses critical gaps in crop yield prediction research by providing the first comprehensive dataset 
-        designed for both field-level and subfield (pixel-level) yield prediction. Unlike existing datasets that are 
-        limited to single regions or crop types, YieldSAT offers unprecedented diversity and scale.
-      </p>
-    </div>
+        <!-- Comparison Table -->
+        <div class="content">
+          <h3 class="title is-4 has-text-centered">Dataset Comparison</h3>
+          <table class="table is-fullwidth is-striped">
+            <thead>
+              <tr>
+                <th>Dataset</th>
+                <th>Countries</th>
+                <th>Crops</th>
+                <th>Years</th>
+                <th>Fields</th>
+                <th>Pixel-Level</th>
+                <th>Spatial Res.</th>
+                <th>Temporal Res.</th>
+                <th>Features</th>
+                <th>Curated</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>SwissYield</strong></td>
+                <td>1</td>
+                <td>1</td>
+                <td>2017-2021</td>
+                <td>73</td>
+                <td>✓</td>
+                <td>10 m</td>
+                <td>5 days</td>
+                <td>14</td>
+                <td>✓</td>
+              </tr>
+              <tr>
+                <td><strong>CropNet</strong></td>
+                <td>1</td>
+                <td>4</td>
+                <td>2017-2022</td>
+                <td>0</td>
+                <td>✗</td>
+                <td>9 km</td>
+                <td>14 days</td>
+                <td>13</td>
+                <td>-</td>
+              </tr>
+              <tr style="background-color: #e8f5e9">
+                <td><strong>YieldSAT (ours)</strong></td>
+                <td><strong>4</strong></td>
+                <td><strong>4</strong></td>
+                <td><strong>2016-2024</strong></td>
+                <td><strong>2,176</strong></td>
+                <td><strong>✓</strong></td>
+                <td><strong>10 m</strong></td>
+                <td><strong>5 days</strong></td>
+                <td><strong>>70</strong></td>
+                <td><strong>✓</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
-    <!-- Comparison Table -->
-    <div class="content">
-      <h3 class="title is-4 has-text-centered">Dataset Comparison</h3>
-      <table class="table is-fullwidth is-striped">
-        <thead>
-          <tr>
-            <th>Dataset</th>
-            <th>Countries</th>
-            <th>Crops</th>
-            <th>Years</th>
-            <th>Fields</th>
-            <th>Pixel-Level</th>
-            <th>Spatial Res.</th>
-            <th>Temporal Res.</th>
-            <th>Features</th>
-            <th>Curated</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>SwissYield</strong></td>
-            <td>1</td>
-            <td>1</td>
-            <td>2017-2021</td>
-            <td>73</td>
-            <td>✓</td>
-            <td>10 m</td>
-            <td>5 days</td>
-            <td>14</td>
-            <td>✓</td>
-          </tr>
-          <tr>
-            <td><strong>CropNet</strong></td>
-            <td>1</td>
-            <td>4</td>
-            <td>2017-2022</td>
-            <td>0</td>
-            <td>✗</td>
-            <td>9 km</td>
-            <td>14 days</td>
-            <td>13</td>
-            <td>-</td>
-          </tr>
-          <tr style="background-color: #e8f5e9;">
-            <td><strong>YieldSAT (ours)</strong></td>
-            <td><strong>4</strong></td>
-            <td><strong>4</strong></td>
-            <td><strong>2016-2024</strong></td>
-            <td><strong>2,176</strong></td>
-            <td><strong>✓</strong></td>
-            <td><strong>10 m</strong></td>
-            <td><strong>5 days</strong></td>
-            <td><strong>>70</strong></td>
-            <td><strong>✓</strong></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- Key Features -->
-    <div class="columns is-multiline">
-      <div class="column is-half">
-        <div class="box" style="height: 100%;">
-          <h4 class="title is-5">
-            <span class="icon-text">
-              <span class="icon has-text-success"><i class="fas fa-check-circle"></i></span>
-              <span>High Resolution & Large Scale</span>
-            </span>
-          </h4>
-          <p>Over 12.2 million yield samples at 10m × 10m resolution across 138,439 hectares, enabling detailed 
-          subfield variability analysis.</p>
+        <!-- Key Features -->
+        <div class="columns is-multiline">
+          <div class="column is-half">
+            <div class="box" style="height: 100%">
+              <h4 class="title is-5">
+                <span class="icon-text">
+                  <span class="icon has-text-success"
+                    ><i class="fas fa-check-circle"></i
+                  ></span>
+                  <span>High Resolution & Large Scale</span>
+                </span>
+              </h4>
+              <p>
+                Over 12.2 million yield samples at 10m × 10m resolution across
+                138,439 hectares, enabling detailed subfield variability
+                analysis.
+              </p>
+            </div>
+          </div>
+          <div class="column is-half">
+            <div class="box" style="height: 100%">
+              <h4 class="title is-5">
+                <span class="icon-text">
+                  <span class="icon has-text-success"
+                    ><i class="fas fa-check-circle"></i
+                  ></span>
+                  <span>Geographic & Temporal Diversity</span>
+                </span>
+              </h4>
+              <p>
+                Data from 4 countries across 2 continents, spanning 9 years
+                (2016-2024), capturing diverse climate zones and agricultural
+                practices.
+              </p>
+            </div>
+          </div>
+          <div class="column is-half">
+            <div class="box" style="height: 100%">
+              <h4 class="title is-5">
+                <span class="icon-text">
+                  <span class="icon has-text-success"
+                    ><i class="fas fa-check-circle"></i
+                  ></span>
+                  <span>Expert-Curated Quality</span>
+                </span>
+              </h4>
+              <p>
+                All 2,176 fields manually inspected by agricultural experts.
+                Comprehensive preprocessing pipeline removes erroneous
+                measurements while preserving data integrity.
+              </p>
+            </div>
+          </div>
+          <div class="column is-half">
+            <div class="box" style="height: 100%">
+              <h4 class="title is-5">
+                <span class="icon-text">
+                  <span class="icon has-text-success"
+                    ><i class="fas fa-check-circle"></i
+                  ></span>
+                  <span>ML-Ready Format</span>
+                </span>
+              </h4>
+              <p>
+                Available in two formats: preprocessed xarray format (24 time
+                steps, input fusion) and flexible format with raw modalities for
+                advanced research.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="column is-half">
-        <div class="box" style="height: 100%;">
-          <h4 class="title is-5">
-            <span class="icon-text">
-              <span class="icon has-text-success"><i class="fas fa-check-circle"></i></span>
-              <span>Geographic & Temporal Diversity</span>
-            </span>
-          </h4>
-          <p>Data from 4 countries across 2 continents, spanning 9 years (2016-2024), capturing diverse climate 
-          zones and agricultural practices.</p>
-        </div>
-      </div>
-      <div class="column is-half">
-        <div class="box" style="height: 100%;">
-          <h4 class="title is-5">
-            <span class="icon-text">
-              <span class="icon has-text-success"><i class="fas fa-check-circle"></i></span>
-              <span>Expert-Curated Quality</span>
-            </span>
-          </h4>
-          <p>All 2,176 fields manually inspected by agricultural experts. Comprehensive preprocessing pipeline 
-          removes erroneous measurements while preserving data integrity.</p>
-        </div>
-      </div>
-      <div class="column is-half">
-        <div class="box" style="height: 100%;">
-          <h4 class="title is-5">
-            <span class="icon-text">
-              <span class="icon has-text-success"><i class="fas fa-check-circle"></i></span>
-              <span>ML-Ready Format</span>
-            </span>
-          </h4>
-          <p>Available in two formats: preprocessed xarray format (24 time steps, input fusion) and flexible format 
-          with raw modalities for advanced research.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- Dataset Overview -->
-<section class="section">
-  <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">Dataset Overview</h2>
-    
-    <div class="content">
-      <p class="has-text-centered">
-        YieldSAT provides high-resolution (10m × 10m) yield data from combine harvesters paired with Sentinel-2 time series,
-        weather, soil, and topography data. The dataset covers approximately 138,439 hectares (~1,384 km²) across major
-        agricultural regions in Argentina, Brazil, Uruguay, and Germany.
-      </p>
-    </div>
+    <!-- Dataset Overview -->
+    <section class="section">
+      <div class="container is-max-desktop">
+        <h2 class="title is-3 has-text-centered">Dataset Overview</h2>
 
-    <!-- World Map Visualization -->
-    <div class="columns is-centered">
-      <div class="column is-full">
+        <div class="content">
+          <p class="has-text-centered">
+            YieldSAT provides high-resolution (10m × 10m) yield data from
+            combine harvesters paired with Sentinel-2 time series, weather,
+            soil, and topography data. The dataset covers approximately 138,439
+            hectares (~1,384 km²) across major agricultural regions in
+            Argentina, Brazil, Uruguay, and Germany.
+          </p>
+        </div>
+
+        <!-- World Map Visualization -->
+        <div class="columns is-centered">
+          <div class="column is-full">
+            <div class="box">
+              <h4 class="subtitle is-5 has-text-centered">
+                Geographic Distribution of Fields
+              </h4>
+              <img
+                src="./static/images/yield_map_spatial2.png"
+                alt="Geographic Distribution of Dataset"
+                style="width: 100%; height: auto"
+              />
+              <p class="has-text-centered">
+                Spatial distribution of 2,176 fields across South America (left)
+                and Europe (right). Marker colors indicate crop type, and marker
+                size represents field area.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dataset Statistics -->
+        <div class="columns is-multiline is-centered">
+          <div class="column is-one-quarter has-text-centered">
+            <div class="box">
+              <p class="heading">Fields</p>
+              <p class="title">2,176</p>
+            </div>
+          </div>
+          <div class="column is-one-quarter has-text-centered">
+            <div class="box">
+              <p class="heading">Countries</p>
+              <p class="title">4</p>
+            </div>
+          </div>
+          <div class="column is-one-quarter has-text-centered">
+            <div class="box">
+              <p class="heading">Total Area (ha)</p>
+              <p class="title">138,439</p>
+            </div>
+          </div>
+          <div class="column is-one-quarter has-text-centered">
+            <div class="box">
+              <p class="heading">Years</p>
+              <p class="title">2016-2024</p>
+            </div>
+          </div>
+          <div class="column is-one-quarter has-text-centered">
+            <div class="box">
+              <p class="heading">Crop Types</p>
+              <p class="title">4</p>
+            </div>
+          </div>
+          <div class="column is-one-quarter has-text-centered">
+            <div class="box">
+              <p class="heading">Yield Samples</p>
+              <p class="title">12.2M</p>
+            </div>
+          </div>
+          <div class="column is-one-quarter has-text-centered">
+            <div class="box">
+              <p class="heading">Satellite Images</p>
+              <p class="title">113,630</p>
+            </div>
+          </div>
+          <div class="column is-one-quarter has-text-centered">
+            <div class="box">
+              <p class="heading">Features</p>
+              <p class="title">>70</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Crop Distribution by Country -->
+        <div class="content">
+          <h3 class="title is-4 has-text-centered">
+            Crop Distribution by Country
+          </h3>
+          <table class="table is-fullwidth is-striped">
+            <thead>
+              <tr>
+                <th>Country</th>
+                <th>Corn</th>
+                <th>Rapeseed</th>
+                <th>Soybean</th>
+                <th>Wheat</th>
+                <th>Total Fields</th>
+                <th>Avg Field Size (ha)</th>
+                <th>Years Covered</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Argentina</strong></td>
+                <td>185</td>
+                <td>-</td>
+                <td>443</td>
+                <td>126</td>
+                <td>754</td>
+                <td>74.3</td>
+                <td>2017-2024</td>
+              </tr>
+              <tr>
+                <td><strong>Brazil</strong></td>
+                <td>118</td>
+                <td>-</td>
+                <td>293</td>
+                <td>140</td>
+                <td>551</td>
+                <td>78.2</td>
+                <td>2017-2024</td>
+              </tr>
+              <tr>
+                <td><strong>Uruguay</strong></td>
+                <td>-</td>
+                <td>-</td>
+                <td>572</td>
+                <td>-</td>
+                <td>572</td>
+                <td>57.3</td>
+                <td>2018-2022</td>
+              </tr>
+              <tr>
+                <td><strong>Germany</strong></td>
+                <td>-</td>
+                <td>111</td>
+                <td>-</td>
+                <td>188</td>
+                <td>299</td>
+                <td>21.6</td>
+                <td>2016-2022</td>
+              </tr>
+              <tr>
+                <td><strong>Total</strong></td>
+                <td>303</td>
+                <td>111</td>
+                <td>1,308</td>
+                <td>454</td>
+                <td>2,176</td>
+                <td>57.8</td>
+                <td>2016-2024</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="has-text-centered is-size-7">
+            <em>Note: "-" indicates crop not available in that country</em>
+          </p>
+        </div>
+
+        <!-- Yield Distribution -->
+        <div class="content">
+          <h3 class="title is-4 has-text-centered">
+            Yield Distribution Diversity
+          </h3>
+          <div class="columns is-centered">
+            <div class="column is-full">
+              <div class="box">
+                <img
+                  src="./static/images/yield_distribution.png"
+                  alt="Yield distributions by crop and country"
+                  style="width: 100%; height: auto"
+                />
+                <p class="has-text-centered">
+                  Yield distributions vary significantly between crops and
+                  countries (p < 0.0001), demonstrating the dataset's diversity
+                  and the challenge of distribution shift.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Combine Harvester Data -->
+    <section class="section">
+      <div class="container is-max-desktop">
+        <h2 class="title is-3 has-text-centered">
+          Combine Harvester Yield Data
+        </h2>
+
+        <div class="content has-text-justified">
+          <p>
+            The core of YieldSAT consists of high-resolution yield measurements
+            collected from combine harvesters equipped with GPS and yield
+            monitoring systems. During harvest, each data point captures
+            geographic coordinates (latitude and longitude), wet yield amount,
+            moisture content, and timestamp. The dataset includes over 12.2
+            million yield samples at 10m spatial resolution. Raw point vector
+            data is rasterized to align with Sentinel-2 imagery, enabling
+            pixel-wise yield prediction as an image regression task.
+          </p>
+        </div>
+
+        <!-- Data Processing Pipeline -->
+        <h3 class="title is-4 has-text-centered">
+          Data Collection & Processing Pipeline
+        </h3>
+
+        <div class="columns is-vcentered">
+          <div class="column">
+            <div class="box">
+              <img
+                src="./static/images/yield_mapping_workflow.png"
+                alt="Yield Data Processing Pipeline"
+                style="width: 100%; height: auto"
+              />
+              <p class="has-text-centered">
+                Schematic overview of data collection and preprocessing: combine
+                harvester collects point vector data, which is preprocessed and
+                rasterized to align with Sentinel-2 10m grid for pixel-wise
+                regression.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Data Quality & Preprocessing -->
+        <div class="content">
+          <h3 class="title is-4 has-text-centered">
+            Data Quality & Preprocessing
+          </h3>
+          <p>
+            All yield maps are manually inspected and curated by agricultural
+            experts. The comprehensive preprocessing pipeline ensures data
+            quality while preserving the original measurements as much as
+            possible:
+          </p>
+          <ul>
+            <li>
+              <strong>Format standardization:</strong> Conversion to shapefile
+              format and coordinate system transformation from WGS84 to UTM
+            </li>
+            <li>
+              <strong>Quality control:</strong> Manual inspection and curation
+              by agricultural experts with quality level classification
+            </li>
+            <li>
+              <strong>Outlier removal:</strong> Removal of zero yields,
+              biologically infeasible values (crop-specific maximum thresholds),
+              and statistical outliers (±3σ)
+            </li>
+            <li>
+              <strong>Moisture correction:</strong> Conversion to standard dry
+              yield using the formula: \(y_s = y_w \times \frac{1 - m_m}{1 -
+              m_s}\), where \(y_s\) is scaled (dry) yield, \(y_w\) is wet yield,
+              \(m_m\) is measured moisture, and \(m_s\) is standard moisture
+            </li>
+            <li>
+              <strong>Rasterization:</strong> Conversion to 10m resolution
+              raster format aligned with Sentinel-2 grid using spatial averaging
+            </li>
+          </ul>
+        </div>
+
+        <!-- Data Quality Examples -->
+        <h3 class="title is-4 has-text-centered">Data Quality Levels</h3>
+        <div class="content">
+          <p class="has-text-centered">
+            The dataset includes fields with varying quality levels. Examples of
+            good, average, and bad quality yield maps are shown below to ensure
+            transparency:
+          </p>
+        </div>
         <div class="box">
-          <h4 class="subtitle is-5 has-text-centered">Geographic Distribution of Fields</h4>
           <img
-            src="./static/images/yield_map_spatial2.png"
-            alt="Geographic Distribution of Dataset"
-            style="width:100%; height:auto;"
-          >
+            src="./static/images/Yield_Maps_Quality.png"
+            alt="Good quality yield map"
+            style="width: 100%; height: auto"
+          />
           <p class="has-text-centered">
-            Spatial distribution of 2,176 fields across South America (left) and Europe (right). Marker colors indicate 
-            crop type, and marker size represents field area.
+            <strong>Good:</strong> Dense, consistent measurements.
+            <strong>Average:</strong> Some spatial gaps or minor artifacts.
+            <strong>Bad:</strong> Sparse data or significant artifacts.
+          </p>
+        </div>
+
+        <!-- Crop-Specific Parameters -->
+        <div class="content">
+          <h3 class="title is-4 has-text-centered">Crop-Specific Parameters</h3>
+          <table class="table is-fullwidth is-striped">
+            <thead>
+              <tr>
+                <th>Crop Type</th>
+                <th>Standard Moisture (%)</th>
+                <th>Maximum Yield Threshold (t/ha)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Corn</td>
+                <td>14.0</td>
+                <td>18.0</td>
+              </tr>
+              <tr>
+                <td>Rapeseed</td>
+                <td>9.0</td>
+                <td>6.0</td>
+              </tr>
+              <tr>
+                <td>Soybean</td>
+                <td>13.0</td>
+                <td>12.0</td>
+              </tr>
+              <tr>
+                <td>Wheat</td>
+                <td>14.0</td>
+                <td>14.0</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sentinel-2 Data -->
+    <section class="section">
+      <div class="container is-max-desktop">
+        <h2 class="title is-3 has-text-centered">Sentinel-2 Time Series</h2>
+
+        <div class="content has-text-justified">
+          <p>
+            For each field, YieldSAT provides multi-temporal Sentinel-2 Level-2A
+            imagery spanning the entire growing season from seeding to harvest.
+            Images are acquired at approximately 5-day intervals and include all
+            13 spectral bands (10m, 20m, and 60m native resolution).
+            Low-resolution bands are upsampled to 10m using nearest-neighbor
+            interpolation for uniform spatial resolution. The Scene
+            Classification Layer (SCL) is included for cloud masking and quality
+            assessment, providing 12 class labels (vegetated, non-vegetated,
+            water, cloud, cloud shadow, etc.). In total, 113,630 labeled
+            satellite images are provided.
+          </p>
+        </div>
+
+        <!-- S2 Time Series Visualization -->
+        <div class="columns is-centered">
+          <div class="column is-full">
+            <div class="box">
+              <h4 class="subtitle is-5 has-text-centered">
+                Example: Soybean Field Time Series (Seeding to Harvest)
+              </h4>
+              <img
+                src="./static/images/S2_time_series_example.jpg"
+                alt="Sentinel-2 time series from seeding to harvest"
+                style="width: 100%; height: auto"
+              />
+              <p class="has-text-centered">
+                Multi-temporal Sentinel-2 imagery showing crop development from
+                seeding (left) through growing season to harvest (right). The
+                final image shows the collected yield map. Cloud coverage is
+                visible in some time steps.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Spectral Bands -->
+        <div class="content">
+          <h3 class="title is-4 has-text-centered">
+            Available Sentinel-2 Bands
+          </h3>
+          <table class="table is-fullwidth is-striped">
+            <thead>
+              <tr>
+                <th>Band</th>
+                <th>Description</th>
+                <th>Central Wavelength (nm)</th>
+                <th>Native Resolution (m)</th>
+                <th>Dataset Resolution (m)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>B01</td>
+                <td>Coastal Aerosol</td>
+                <td>443</td>
+                <td>60</td>
+                <td>10</td>
+              </tr>
+              <tr>
+                <td>B02</td>
+                <td>Blue</td>
+                <td>490</td>
+                <td>10</td>
+                <td>10</td>
+              </tr>
+              <tr>
+                <td>B03</td>
+                <td>Green</td>
+                <td>560</td>
+                <td>10</td>
+                <td>10</td>
+              </tr>
+              <tr>
+                <td>B04</td>
+                <td>Red</td>
+                <td>665</td>
+                <td>10</td>
+                <td>10</td>
+              </tr>
+              <tr>
+                <td>B05</td>
+                <td>Red Edge 1</td>
+                <td>705</td>
+                <td>20</td>
+                <td>10</td>
+              </tr>
+              <tr>
+                <td>B06</td>
+                <td>Red Edge 2</td>
+                <td>740</td>
+                <td>20</td>
+                <td>10</td>
+              </tr>
+              <tr>
+                <td>B07</td>
+                <td>Red Edge 3</td>
+                <td>783</td>
+                <td>20</td>
+                <td>10</td>
+              </tr>
+              <tr>
+                <td>B08</td>
+                <td>NIR</td>
+                <td>842</td>
+                <td>10</td>
+                <td>10</td>
+              </tr>
+              <tr>
+                <td>B8A</td>
+                <td>Narrow NIR</td>
+                <td>865</td>
+                <td>20</td>
+                <td>10</td>
+              </tr>
+              <tr>
+                <td>B09</td>
+                <td>Water Vapour</td>
+                <td>945</td>
+                <td>60</td>
+                <td>10</td>
+              </tr>
+              <tr>
+                <td>B10</td>
+                <td>SWIR Cirrus</td>
+                <td>1380</td>
+                <td>60</td>
+                <td>10</td>
+              </tr>
+              <tr>
+                <td>B11</td>
+                <td>SWIR 1</td>
+                <td>1610</td>
+                <td>20</td>
+                <td>10</td>
+              </tr>
+              <tr>
+                <td>B12</td>
+                <td>SWIR 2</td>
+                <td>2190</td>
+                <td>20</td>
+                <td>10</td>
+              </tr>
+              <tr>
+                <td>SCL</td>
+                <td>Scene Classification</td>
+                <td>-</td>
+                <td>20</td>
+                <td>10</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="has-text-centered is-size-7">
+            <em
+              >Note: Low-resolution bands upsampled to 10m using
+              nearest-neighbor interpolation</em
+            >
           </p>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- Dataset Statistics -->
-    <div class="columns is-multiline is-centered">
-      <div class="column is-one-quarter has-text-centered">
-        <div class="box">
-          <p class="heading">Fields</p>
-          <p class="title">2,176</p>
-        </div>
-      </div>
-      <div class="column is-one-quarter has-text-centered">
-        <div class="box">
-          <p class="heading">Countries</p>
-          <p class="title">4</p>
-        </div>
-      </div>
-      <div class="column is-one-quarter has-text-centered">
-        <div class="box">
-          <p class="heading">Total Area (ha)</p>
-          <p class="title">138,439</p>
-        </div>
-      </div>
-      <div class="column is-one-quarter has-text-centered">
-        <div class="box">
-          <p class="heading">Years</p>
-          <p class="title">2016-2024</p>
-        </div>
-      </div>
-      <div class="column is-one-quarter has-text-centered">
-        <div class="box">
-          <p class="heading">Crop Types</p>
-          <p class="title">4</p>
-        </div>
-      </div>
-      <div class="column is-one-quarter has-text-centered">
-        <div class="box">
-          <p class="heading">Yield Samples</p>
-          <p class="title">12.2M</p>
-        </div>
-      </div>
-      <div class="column is-one-quarter has-text-centered">
-        <div class="box">
-          <p class="heading">Satellite Images</p>
-          <p class="title">113,630</p>
-        </div>
-      </div>
-      <div class="column is-one-quarter has-text-centered">
-        <div class="box">
-          <p class="heading">Features</p>
-          <p class="title">>70</p>
-        </div>
-      </div>
-    </div>
+    <!-- Additional Data Sources -->
+    <section class="section">
+      <div class="container is-max-desktop">
+        <h2 class="title is-3 has-text-centered">
+          Auxiliary Environmental Data
+        </h2>
 
-    <!-- Crop Distribution by Country -->
-    <div class="content">
-      <h3 class="title is-4 has-text-centered">Crop Distribution by Country</h3>
-      <table class="table is-fullwidth is-striped">
-        <thead>
-          <tr>
-            <th>Country</th>
-            <th>Corn</th>
-            <th>Rapeseed</th>
-            <th>Soybean</th>
-            <th>Wheat</th>
-            <th>Total Fields</th>
-            <th>Avg Field Size (ha)</th>
-            <th>Years Covered</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Argentina</strong></td>
-            <td>185</td>
-            <td>-</td>
-            <td>443</td>
-            <td>126</td>
-            <td>754</td>
-            <td>74.3</td>
-            <td>2017-2024</td>
-          </tr>
-          <tr>
-            <td><strong>Brazil</strong></td>
-            <td>118</td>
-            <td>-</td>
-            <td>293</td>
-            <td>140</td>
-            <td>551</td>
-            <td>78.2</td>
-            <td>2017-2024</td>
-          </tr>
-          <tr>
-            <td><strong>Uruguay</strong></td>
-            <td>-</td>
-            <td>-</td>
-            <td>572</td>
-            <td>-</td>
-            <td>572</td>
-            <td>57.3</td>
-            <td>2018-2022</td>
-          </tr>
-          <tr>
-            <td><strong>Germany</strong></td>
-            <td>-</td>
-            <td>111</td>
-            <td>-</td>
-            <td>188</td>
-            <td>299</td>
-            <td>21.6</td>
-            <td>2016-2022</td>
-          </tr>
-          <tr>
-            <td><strong>Total</strong></td>
-            <td>303</td>
-            <td>111</td>
-            <td>1,308</td>
-            <td>454</td>
-            <td>2,176</td>
-            <td>57.8</td>
-            <td>2016-2024</td>
-          </tr>
-        </tbody>
-      </table>
-      <p class="has-text-centered is-size-7">
-        <em>Note: "-" indicates crop not available in that country</em>
-      </p>
-    </div>
-
-    <!-- Yield Distribution -->
-    <div class="content">
-      <h3 class="title is-4 has-text-centered">Yield Distribution Diversity</h3>
-      <div class="columns is-centered">
-        <div class="column is-full">
-          <div class="box">
-            <img src="./static/images/yield_distribution.png" 
-                 alt="Yield distributions by crop and country" 
-                 style="width:100%; height:auto;">
-            <p class="has-text-centered">
-              Yield distributions vary significantly between crops and countries (p < 0.0001), demonstrating 
-              the dataset's diversity and the challenge of distribution shift.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Combine Harvester Data -->
-<section class="section">
-  <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">Combine Harvester Yield Data</h2>
-    
-    <div class="content has-text-justified">
-      <p>
-        The core of YieldSAT consists of high-resolution yield measurements collected from combine harvesters equipped
-        with GPS and yield monitoring systems. During harvest, each data point captures geographic coordinates (latitude
-        and longitude), wet yield amount, moisture content, and timestamp. The dataset includes over 12.2 million yield
-        samples at 10m spatial resolution. Raw point vector data is rasterized to align with Sentinel-2 imagery,
-        enabling pixel-wise yield prediction as an image regression task.
-      </p>
-    </div>
-
-    <!-- Data Processing Pipeline -->
-    <h3 class="title is-4 has-text-centered">Data Collection & Processing Pipeline</h3>
-    
-    <div class="columns is-vcentered">
-      <div class="column">
-        <div class="box">
-          <img src="./static/images/yield_mapping_workflow.png" 
-               alt="Yield Data Processing Pipeline" 
-               style="width:100%; height:auto;">
-          <p class="has-text-centered">
-            Schematic overview of data collection and preprocessing: combine harvester collects point vector data,
-            which is preprocessed and rasterized to align with Sentinel-2 10m grid for pixel-wise regression.
+        <div class="content has-text-justified">
+          <p>
+            To complement Sentinel-2 imagery and compensate for missing data due
+            to cloud cover, YieldSAT includes Additional Data Modalities (ADMs)
+            that influence crop development and yield. All data sources meet
+            strict criteria: (1) demonstrated influence on crop growth, (2)
+            freely accessible, (3) global coverage, and (4) high spatial
+            resolution. These modalities provide over 70 features per sample.
           </p>
         </div>
+
+        <div class="columns is-multiline">
+          <!-- Weather Data -->
+          <div class="column is-half">
+            <div class="box" style="height: 100%">
+              <h3 class="title is-5">
+                <span class="icon-text">
+                  <span class="icon"><i class="fas fa-cloud-sun"></i></span>
+                  <span>Weather Data</span>
+                </span>
+              </h3>
+              <div class="content">
+                <ul>
+                  <li><strong>Source:</strong> ERA5-Land Reanalysis (ECMWF)</li>
+                  <li><strong>Temporal Resolution:</strong> Daily</li>
+                  <li>
+                    <strong>Variables:</strong> Maximum temperature, mean
+                    temperature, minimum temperature, total precipitation
+                  </li>
+                  <li>
+                    <strong>Spatial Resolution:</strong> 30 km (interpolated to
+                    field centroids)
+                  </li>
+                  <li>
+                    <strong>Coverage:</strong> Entire growing season (seeding to
+                    harvest)
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Soil Data -->
+          <div class="column is-half">
+            <div class="box" style="height: 100%">
+              <h3 class="title is-5">
+                <span class="icon-text">
+                  <span class="icon"><i class="fas fa-layer-group"></i></span>
+                  <span>Soil Properties</span>
+                </span>
+              </h3>
+              <div class="content">
+                <ul>
+                  <li><strong>Source:</strong> SoilGrids 2.0</li>
+                  <li>
+                    <strong>Variables:</strong> Soil organic carbon, nitrogen,
+                    cation exchange capacity, clay content, silt content, sand
+                    content, pH, coarse fragments
+                  </li>
+                  <li>
+                    <strong>Depth Layers:</strong> 6 layers (0-5, 5-15, 15-30,
+                    30-60, 60-100, 100-200 cm)
+                  </li>
+                  <li>
+                    <strong>Spatial Resolution:</strong> 250m native, upsampled
+                    to 10m using cubic spline interpolation
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- DEM Data -->
+          <div class="column is-half">
+            <div class="box" style="height: 100%">
+              <h3 class="title is-5">
+                <span class="icon-text">
+                  <span class="icon"><i class="fas fa-mountain"></i></span>
+                  <span>Topography Data</span>
+                </span>
+              </h3>
+              <div class="content">
+                <ul>
+                  <li>
+                    <strong>Source:</strong> SRTM (Shuttle Radar Topography
+                    Mission)
+                  </li>
+                  <li>
+                    <strong>Spatial Resolution:</strong> 30m native, upsampled
+                    to 10m using cubic spline interpolation
+                  </li>
+                  <li>
+                    <strong>Variables:</strong> Digital Elevation Model (DEM),
+                    slope, aspect, curvature, Topographic Wetness Index (TWI)
+                  </li>
+                  <li>
+                    <strong>Processing:</strong> Derived features computed using
+                    RichDEM library
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Management Data -->
+          <div class="column is-half">
+            <div class="box" style="height: 100%">
+              <h3 class="title is-5">
+                <span class="icon-text">
+                  <span class="icon"><i class="fas fa-tractor"></i></span>
+                  <span>Management Information</span>
+                </span>
+              </h3>
+              <div class="content">
+                <ul>
+                  <li>
+                    <strong>Crop Types:</strong> Corn (Zea mays), rapeseed
+                    (Brassica napus), soybean (Glycine max), wheat (Triticum
+                    aestivum)
+                  </li>
+                  <li>
+                    <strong>Seeding Date:</strong> Reported by farmers or
+                    estimated from NDVI time series
+                  </li>
+                  <li>
+                    <strong>Harvest Date:</strong> Extracted from combine
+                    harvester timestamp
+                  </li>
+                  <li>
+                    <strong>Field Boundaries:</strong> Manually digitized
+                    polygons for each field
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
 
-    <!-- Data Quality & Preprocessing -->
-    <div class="content">
-      <h3 class="title is-4 has-text-centered">Data Quality & Preprocessing</h3>
-      <p>
-        All yield maps are manually inspected and curated by agricultural experts. The comprehensive preprocessing 
-        pipeline ensures data quality while preserving the original measurements as much as possible:
-      </p>
-      <ul>
-        <li><strong>Format standardization:</strong> Conversion to shapefile format and coordinate system transformation from WGS84 to UTM</li>
-        <li><strong>Quality control:</strong> Manual inspection and curation by agricultural experts with quality level classification</li>
-        <li><strong>Outlier removal:</strong> Removal of zero yields, biologically infeasible values (crop-specific maximum thresholds), 
-        and statistical outliers (±3σ)</li>
-        <li><strong>Moisture correction:</strong> Conversion to standard dry yield using the formula: 
-        \(y_s = y_w \times \frac{1 - m_m}{1 - m_s}\), where \(y_s\) is scaled (dry) yield, \(y_w\) is wet yield, 
-        \(m_m\) is measured moisture, and \(m_s\) is standard moisture</li>
-        <li><strong>Rasterization:</strong> Conversion to 10m resolution raster format aligned with Sentinel-2 grid using spatial averaging</li>
-      </ul>
-    </div>
+    <!-- Data Formats -->
+    <section class="section">
+      <div class="container is-max-desktop">
+        <h2 class="title is-3 has-text-centered">Dataset Formats</h2>
 
-    <!-- Data Quality Examples -->
-    <h3 class="title is-4 has-text-centered">Data Quality Levels</h3>
-    <div class="content">
-      <p class="has-text-centered">
-        The dataset includes fields with varying quality levels. Examples of good, average, and bad quality 
-        yield maps are shown below to ensure transparency:
-      </p>
-    </div>
-    <div class="box">
-      <img src="./static/images/Yield_Maps_Quality.png" 
-           alt="Good quality yield map" 
-           style="width:100%; height:auto;">
-      <p class="has-text-centered">
-        <strong>Good:</strong> Dense, consistent measurements. 
-        <strong>Average:</strong> Some spatial gaps or minor artifacts. 
-        <strong>Bad:</strong> Sparse data or significant artifacts.
-      </p>
-    </div>
-
-    <!-- Crop-Specific Parameters -->
-    <div class="content">
-      <h3 class="title is-4 has-text-centered">Crop-Specific Parameters</h3>
-      <table class="table is-fullwidth is-striped">
-        <thead>
-          <tr>
-            <th>Crop Type</th>
-            <th>Standard Moisture (%)</th>
-            <th>Maximum Yield Threshold (t/ha)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Corn</td>
-            <td>14.0</td>
-            <td>18.0</td>
-          </tr>
-          <tr>
-            <td>Rapeseed</td>
-            <td>9.0</td>
-            <td>6.0</td>
-          </tr>
-          <tr>
-            <td>Soybean</td>
-            <td>13.0</td>
-            <td>12.0</td>
-          </tr>
-          <tr>
-            <td>Wheat</td>
-            <td>14.0</td>
-            <td>14.0</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</section>
-
-<!-- Sentinel-2 Data -->
-<section class="section">
-  <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">Sentinel-2 Time Series</h2>
-    
-    <div class="content has-text-justified">
-      <p>
-        For each field, YieldSAT provides multi-temporal Sentinel-2 Level-2A imagery spanning the entire growing season
-        from seeding to harvest. Images are acquired at approximately 5-day intervals and include all 13 spectral bands
-        (10m, 20m, and 60m native resolution). Low-resolution bands are upsampled to 10m using nearest-neighbor interpolation
-        for uniform spatial resolution. The Scene Classification Layer (SCL) is included for cloud masking and quality
-        assessment, providing 12 class labels (vegetated, non-vegetated, water, cloud, cloud shadow, etc.). 
-        In total, 113,630 labeled satellite images are provided.
-      </p>
-    </div>
-
-    <!-- S2 Time Series Visualization -->
-    <div class="columns is-centered">
-      <div class="column is-full">
-        <div class="box">
-          <h4 class="subtitle is-5 has-text-centered">Example: Soybean Field Time Series (Seeding to Harvest)</h4>
-          <img src="./static/images/S2_time_series_example.jpg" 
-               alt="Sentinel-2 time series from seeding to harvest" 
-               style="width:100%; height:auto;">
-          <p class="has-text-centered">
-            Multi-temporal Sentinel-2 imagery showing crop development from seeding (left) through growing season to harvest (right).
-            The final image shows the collected yield map. Cloud coverage is visible in some time steps.
+        <div class="content has-text-justified">
+          <p>
+            YieldSAT is available in two formats to accommodate different
+            research needs and model architectures:
           </p>
         </div>
-      </div>
-    </div>
 
-    <!-- Spectral Bands -->
-    <div class="content">
-      <h3 class="title is-4 has-text-centered">Available Sentinel-2 Bands</h3>
-      <table class="table is-fullwidth is-striped">
-        <thead>
-          <tr>
-            <th>Band</th>
-            <th>Description</th>
-            <th>Central Wavelength (nm)</th>
-            <th>Native Resolution (m)</th>
-            <th>Dataset Resolution (m)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>B01</td><td>Coastal Aerosol</td><td>443</td><td>60</td><td>10</td></tr>
-          <tr><td>B02</td><td>Blue</td><td>490</td><td>10</td><td>10</td></tr>
-          <tr><td>B03</td><td>Green</td><td>560</td><td>10</td><td>10</td></tr>
-          <tr><td>B04</td><td>Red</td><td>665</td><td>10</td><td>10</td></tr>
-          <tr><td>B05</td><td>Red Edge 1</td><td>705</td><td>20</td><td>10</td></tr>
-          <tr><td>B06</td><td>Red Edge 2</td><td>740</td><td>20</td><td>10</td></tr>
-          <tr><td>B07</td><td>Red Edge 3</td><td>783</td><td>20</td><td>10</td></tr>
-          <tr><td>B08</td><td>NIR</td><td>842</td><td>10</td><td>10</td></tr>
-          <tr><td>B8A</td><td>Narrow NIR</td><td>865</td><td>20</td><td>10</td></tr>
-          <tr><td>B09</td><td>Water Vapour</td><td>945</td><td>60</td><td>10</td></tr>
-          <tr><td>B10</td><td>SWIR Cirrus</td><td>1380</td><td>60</td><td>10</td></tr>
-          <tr><td>B11</td><td>SWIR 1</td><td>1610</td><td>20</td><td>10</td></tr>
-          <tr><td>B12</td><td>SWIR 2</td><td>2190</td><td>20</td><td>10</td></tr>
-          <tr><td>SCL</td><td>Scene Classification</td><td>-</td><td>20</td><td>10</td></tr>
-        </tbody>
-      </table>
-      <p class="has-text-centered is-size-7">
-        <em>Note: Low-resolution bands upsampled to 10m using nearest-neighbor interpolation</em>
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- Additional Data Sources -->
-<section class="section">
-  <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">Auxiliary Environmental Data</h2>
-    
-    <div class="content has-text-justified">
-      <p>
-        To complement Sentinel-2 imagery and compensate for missing data due to cloud cover, YieldSAT includes
-        Additional Data Modalities (ADMs) that influence crop development and yield. All data sources meet strict
-        criteria: (1) demonstrated influence on crop growth, (2) freely accessible, (3) global coverage, and 
-        (4) high spatial resolution. These modalities provide over 70 features per sample.
-      </p>
-    </div>
-
-    <div class="columns is-multiline">
-      <!-- Weather Data -->
-      <div class="column is-half">
-        <div class="box" style="height: 100%;">
-          <h3 class="title is-5">
-            <span class="icon-text">
-              <span class="icon"><i class="fas fa-cloud-sun"></i></span>
-              <span>Weather Data</span>
-            </span>
-          </h3>
-          <div class="content">
-            <ul>
-              <li><strong>Source:</strong> ERA5-Land Reanalysis (ECMWF)</li>
-              <li><strong>Temporal Resolution:</strong> Daily</li>
-              <li><strong>Variables:</strong> Maximum temperature, mean temperature, minimum temperature, total precipitation</li>
-              <li><strong>Spatial Resolution:</strong> 30 km (interpolated to field centroids)</li>
-              <li><strong>Coverage:</strong> Entire growing season (seeding to harvest)</li>
-            </ul>
+        <div class="columns">
+          <div class="column is-half">
+            <div class="box" style="height: 100%">
+              <h3 class="title is-5">
+                <span class="icon-text">
+                  <span class="icon has-text-info"
+                    ><i class="fas fa-rocket"></i
+                  ></span>
+                  <span>Preprocessed Format (ML-Ready)</span>
+                </span>
+              </h3>
+              <div class="content">
+                <ul>
+                  <li><strong>Format:</strong> Xarray dataset</li>
+                  <li>
+                    <strong>Time Steps:</strong> 24 uniformly sampled time steps
+                  </li>
+                  <li>
+                    <strong>Fusion Strategy:</strong> Input fusion via
+                    concatenation and spatial/temporal repetition
+                  </li>
+                  <li>
+                    <strong>Use Case:</strong> Rapid prototyping, baseline
+                    models, quick experimentation
+                  </li>
+                  <li>
+                    <strong>Advantages:</strong> Ready for immediate training,
+                    standardized format
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="column is-half">
+            <div class="box" style="height: 100%">
+              <h3 class="title is-5">
+                <span class="icon-text">
+                  <span class="icon has-text-warning"
+                    ><i class="fas fa-tools"></i
+                  ></span>
+                  <span>Flexible Format</span>
+                </span>
+              </h3>
+              <div class="content">
+                <ul>
+                  <li>
+                    <strong>Format:</strong> Individual files per modality with
+                    metadata
+                  </li>
+                  <li>
+                    <strong>Modalities:</strong> Separate files for Sentinel-2,
+                    weather, soil, topography, yield
+                  </li>
+                  <li>
+                    <strong>Use Case:</strong> Advanced fusion methods, custom
+                    preprocessing, novel architectures
+                  </li>
+                  <li>
+                    <strong>Advantages:</strong> Full flexibility, preserve
+                    original temporal resolution
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+    </section>
 
-      <!-- Soil Data -->
-      <div class="column is-half">
-        <div class="box" style="height: 100%;">
-          <h3 class="title is-5">
-            <span class="icon-text">
-              <span class="icon"><i class="fas fa-layer-group"></i></span>
-              <span>Soil Properties</span>
-            </span>
-          </h3>
-          <div class="content">
-            <ul>
-              <li><strong>Source:</strong> SoilGrids 2.0</li>
-              <li><strong>Variables:</strong> Soil organic carbon, nitrogen, cation exchange capacity, clay content, 
-              silt content, sand content, pH, coarse fragments</li>
-              <li><strong>Depth Layers:</strong> 6 layers (0-5, 5-15, 15-30, 30-60, 60-100, 100-200 cm)</li>
-              <li><strong>Spatial Resolution:</strong> 250m native, upsampled to 10m using cubic spline interpolation</li>
-            </ul>
-          </div>
-        </div>
-      </div>
+    <!-- Benchmark Results -->
+    <section class="section">
+      <div class="container is-max-desktop">
+        <h2 class="title is-3 has-text-centered">Benchmark Results</h2>
 
-      <!-- DEM Data -->
-      <div class="column is-half">
-        <div class="box" style="height: 100%;">
-          <h3 class="title is-5">
-            <span class="icon-text">
-              <span class="icon"><i class="fas fa-mountain"></i></span>
-              <span>Topography Data</span>
-            </span>
-          </h3>
-          <div class="content">
-            <ul>
-              <li><strong>Source:</strong> SRTM (Shuttle Radar Topography Mission)</li>
-              <li><strong>Spatial Resolution:</strong> 30m native, upsampled to 10m using cubic spline interpolation</li>
-              <li><strong>Variables:</strong> Digital Elevation Model (DEM), slope, aspect, curvature, 
-              Topographic Wetness Index (TWI)</li>
-              <li><strong>Processing:</strong> Derived features computed using RichDEM library</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- Management Data -->
-      <div class="column is-half">
-        <div class="box" style="height: 100%;">
-          <h3 class="title is-5">
-            <span class="icon-text">
-              <span class="icon"><i class="fas fa-tractor"></i></span>
-              <span>Management Information</span>
-            </span>
-          </h3>
-          <div class="content">
-            <ul>
-              <li><strong>Crop Types:</strong> Corn (Zea mays), rapeseed (Brassica napus), soybean (Glycine max), 
-              wheat (Triticum aestivum)</li>
-              <li><strong>Seeding Date:</strong> Reported by farmers or estimated from NDVI time series</li>
-              <li><strong>Harvest Date:</strong> Extracted from combine harvester timestamp</li>
-              <li><strong>Field Boundaries:</strong> Manually digitized polygons for each field</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Data Formats -->
-<section class="section">
-  <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">Dataset Formats</h2>
-    
-    <div class="content has-text-justified">
-      <p>
-        YieldSAT is available in two formats to accommodate different research needs and model architectures:
-      </p>
-    </div>
-
-    <div class="columns">
-      <div class="column is-half">
-        <div class="box" style="height: 100%;">
-          <h3 class="title is-5">
-            <span class="icon-text">
-              <span class="icon has-text-info"><i class="fas fa-rocket"></i></span>
-              <span>Preprocessed Format (ML-Ready)</span>
-            </span>
-          </h3>
-          <div class="content">
-            <ul>
-              <li><strong>Format:</strong> Xarray dataset</li>
-              <li><strong>Time Steps:</strong> 24 uniformly sampled time steps</li>
-              <li><strong>Fusion Strategy:</strong> Input fusion via concatenation and spatial/temporal repetition</li>
-              <li><strong>Use Case:</strong> Rapid prototyping, baseline models, quick experimentation</li>
-              <li><strong>Advantages:</strong> Ready for immediate training, standardized format</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="column is-half">
-        <div class="box" style="height: 100%;">
-          <h3 class="title is-5">
-            <span class="icon-text">
-              <span class="icon has-text-warning"><i class="fas fa-tools"></i></span>
-              <span>Flexible Format</span>
-            </span>
-          </h3>
-          <div class="content">
-            <ul>
-              <li><strong>Format:</strong> Individual files per modality with metadata</li>
-              <li><strong>Modalities:</strong> Separate files for Sentinel-2, weather, soil, topography, yield</li>
-              <li><strong>Use Case:</strong> Advanced fusion methods, custom preprocessing, novel architectures</li>
-              <li><strong>Advantages:</strong> Full flexibility, preserve original temporal resolution</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Benchmark Results -->
-<section class="section">
-  <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">Benchmark Results</h2>
-    
-    <div class="content has-text-justified">
-      <p>
-        We provide comprehensive benchmark results using various deep learning architectures and data fusion methods.
-        Models are evaluated at both subfield (pixel) and field levels using 10-fold stratified cross-validation.
-        Results show that incorporating spatial information (3D-CNN blocks) and advanced fusion methods significantly
-        improves performance. All models are trained on each country-crop combination independently.
-      </p>
-    </div>
-
-    <!-- Model Architectures -->
-    <div class="content">
-      <h3 class="title is-4 has-text-centered">Evaluated Architectures</h3>
-      <div class="columns is-multiline">
-        <div class="column is-half">
-          <div class="box">
-            <h4 class="title is-6">Temporal-Only Models</h4>
-            <ul>
-              <li><strong>LSTM:</strong> Long Short-Term Memory for temporal modeling without spatial context</li>
-              <li><strong>Transformer:</strong> Attention-based temporal modeling with self-attention mechanism</li>
-            </ul>
-          </div>
-        </div>
-        <div class="column is-half">
-          <div class="box">
-            <h4 class="title is-6">Spatial-Temporal Models</h4>
-            <ul>
-              <li><strong>3D-LSTM:</strong> LSTM with 3D-CNN blocks for spatial-temporal modeling</li>
-              <li><strong>3D-ConvLSTM:</strong> Convolutional LSTM with built-in spatial dependencies</li>
-            </ul>
-          </div>
-        </div>
-        <div class="column is-half">
-          <div class="box">
-            <h4 class="title is-6">Simple Fusion</h4>
-            <ul>
-              <li><strong>Input Fusion:</strong> Early concatenation of all modalities via spatial/temporal repetition</li>
-            </ul>
-          </div>
-        </div>
-        <div class="column is-half">
-          <div class="box">
-            <h4 class="title is-6">Advanced Fusion</h4>
-            <ul>
-              <li><strong>MMGF:</strong> Multi-modal gated fusion with learnable gating mechanisms</li>
-              <li><strong>AFF:</strong> Attention-based feature fusion with learnable query for channel attention</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Performance Highlights -->
-    <div class="columns is-multiline is-centered">
-      <div class="column is-one-third has-text-centered">
-        <div class="box">
-          <p class="heading">Best Field-Level R²</p>
-          <p class="title">0.86</p>
-          <p class="subtitle is-6">Argentina Soybean (AFF)</p>
-        </div>
-      </div>
-      <div class="column is-one-third has-text-centered">
-        <div class="box">
-          <p class="heading">Best RMSE (t/ha)</p>
-          <p class="title">0.39</p>
-          <p class="subtitle is-6">Argentina Soybean (AFF)</p>
-        </div>
-      </div>
-      <div class="column is-one-third has-text-centered">
-        <div class="box">
-          <p class="heading">Spatial Modeling Gain</p>
-          <p class="title">~14% R²</p>
-          <p class="subtitle is-6">3D-LSTM vs LSTM</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Detailed Results Table - R² -->
-    <div class="content">
-      <h3 class="title is-4 has-text-centered">Detailed Results: R² Score</h3>
-      <div style="overflow-x: auto;">
-        <table class="table is-fullwidth is-striped is-narrow">
-          <thead>
-            <tr>
-              <th rowspan="2">Data Modalities</th>
-              <th rowspan="2">Fusion Method</th>
-              <th rowspan="2">Model</th>
-              <th colspan="4" class="has-text-centered">Field-Level</th>
-              <th colspan="4" class="has-text-centered">Subfield (Pixel-Level)</th>
-            </tr>
-            <tr>
-              <th>ARG-S</th>
-              <th>URG-S</th>
-              <th>GER-R</th>
-              <th>GER-W</th>
-              <th>ARG-S</th>
-              <th>URG-S</th>
-              <th>GER-R</th>
-              <th>GER-W</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td rowspan="4">Sentinel-2 Only</td>
-              <td rowspan="4">-</td>
-              <td>LSTM</td>
-              <td>0.72</td>
-              <td>0.69</td>
-              <td>0.54</td>
-              <td>0.55</td>
-              <td>0.56</td>
-              <td>0.37</td>
-              <td>0.32</td>
-              <td>0.30</td>
-            </tr>
-            <tr>
-              <td>Transformer</td>
-              <td>0.76</td>
-              <td>0.74</td>
-              <td>0.73</td>
-              <td>0.62</td>
-              <td>0.61</td>
-              <td>0.40</td>
-              <td>0.45</td>
-              <td>0.33</td>
-            </tr>
-            <tr>
-              <td>3D-LSTM</td>
-              <td>0.81</td>
-              <td>0.75</td>
-              <td>0.81</td>
-              <td>0.68</td>
-              <td>0.64</td>
-              <td>0.40</td>
-              <td>0.49</td>
-              <td>0.36</td>
-            </tr>
-            <tr>
-              <td>3D-ConvLSTM</td>
-              <td>0.82</td>
-              <td>0.76</td>
-              <td>0.82</td>
-              <td>0.69</td>
-              <td>0.62</td>
-              <td>0.40</td>
-              <td>0.48</td>
-              <td>0.36</td>
-            </tr>
-            <tr>
-              <td rowspan="4">Sentinel-2 + ADM</td>
-              <td rowspan="4">Input Fusion</td>
-              <td>LSTM</td>
-              <td>0.76</td>
-              <td>0.77</td>
-              <td>0.77</td>
-              <td>0.66</td>
-              <td>0.63</td>
-              <td>0.42</td>
-              <td>0.46</td>
-              <td>0.35</td>
-            </tr>
-            <tr>
-              <td>Transformer</td>
-              <td>0.74</td>
-              <td>0.74</td>
-              <td>0.76</td>
-              <td>0.65</td>
-              <td>0.60</td>
-              <td>0.40</td>
-              <td>0.46</td>
-              <td>0.38</td>
-            </tr>
-            <tr>
-              <td>3D-LSTM</td>
-              <td>0.78</td>
-              <td>0.76</td>
-              <td>0.77</td>
-              <td>0.70</td>
-              <td>0.62</td>
-              <td>0.40</td>
-              <td>0.46</td>
-              <td>0.46</td>
-            </tr>
-            <tr>
-              <td>3D-ConvLSTM</td>
-              <td>0.80</td>
-              <td>0.78</td>
-              <td>0.78</td>
-              <td>0.68</td>
-              <td>0.63</td>
-              <td>0.41</td>
-              <td>0.44</td>
-              <td>0.38</td>
-            </tr>
-            <tr style="background-color: #e3f2fd;">
-              <td rowspan="2">Sentinel-2 + ADM</td>
-              <td rowspan="2">Advanced Fusion</td>
-              <td>MMGF</td>
-              <td>0.84</td>
-              <td>0.78</td>
-              <td>0.80</td>
-              <td>0.80</td>
-              <td>0.68</td>
-              <td>0.42</td>
-              <td>0.46</td>
-              <td>0.44</td>
-            </tr>
-            <tr style="background-color: #c8e6c9;">
-              <td><strong>AFF</strong></td>
-              <td><strong>0.86</strong></td>
-              <td><strong>0.81</strong></td>
-              <td><strong>0.80</strong></td>
-              <td><strong>0.81</strong></td>
-              <td><strong>0.70</strong></td>
-              <td><strong>0.43</strong></td>
-              <td><strong>0.49</strong></td>
-              <td><strong>0.48</strong></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="has-text-centered is-size-7">
-        <em>ARG-S: Argentina Soybean, URG-S: Uruguay Soybean, GER-R: Germany Rapeseed, GER-W: Germany Wheat. 
-        Best results highlighted in green.</em>
-      </p>
-    </div>
-
-    <!-- Detailed Results Table - RMSE -->
-    <div class="content">
-      <h3 class="title is-4 has-text-centered">Detailed Results: RMSE (t/ha)</h3>
-      <div style="overflow-x: auto;">
-        <table class="table is-fullwidth is-striped is-narrow">
-          <thead>
-            <tr>
-              <th rowspan="2">Data Modalities</th>
-              <th rowspan="2">Fusion Method</th>
-              <th rowspan="2">Model</th>
-              <th colspan="4" class="has-text-centered">Field-Level</th>
-              <th colspan="4" class="has-text-centered">Subfield (Pixel-Level)</th>
-            </tr>
-            <tr>
-              <th>ARG-S</th>
-              <th>URG-S</th>
-              <th>GER-R</th>
-              <th>GER-W</th>
-              <th>ARG-S</th>
-              <th>URG-S</th>
-              <th>GER-R</th>
-              <th>GER-W</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td rowspan="4">Sentinel-2 Only</td>
-              <td rowspan="4">-</td>
-              <td>LSTM</td>
-              <td>0.56</td>
-              <td>0.59</td>
-              <td>0.91</td>
-              <td>1.27</td>
-              <td>0.97</td>
-              <td>1.25</td>
-              <td>1.37</td>
-              <td>2.47</td>
-            </tr>
-            <tr>
-              <td>Transformer</td>
-              <td>0.51</td>
-              <td>0.54</td>
-              <td>0.69</td>
-              <td>1.17</td>
-              <td>0.91</td>
-              <td>1.23</td>
-              <td>1.24</td>
-              <td>2.41</td>
-            </tr>
-            <tr>
-              <td>3D-LSTM</td>
-              <td>0.49</td>
-              <td>0.54</td>
-              <td>0.58</td>
-              <td>1.08</td>
-              <td>0.90</td>
-              <td>1.23</td>
-              <td>1.19</td>
-              <td>2.36</td>
-            </tr>
-            <tr>
-              <td>3D-ConvLSTM</td>
-              <td>0.44</td>
-              <td>0.53</td>
-              <td>0.57</td>
-              <td>1.06</td>
-              <td>0.90</td>
-              <td>1.22</td>
-              <td>1.20</td>
-              <td>2.36</td>
-            </tr>
-            <tr>
-              <td rowspan="4">Sentinel-2 + ADM</td>
-              <td rowspan="4">Input Fusion</td>
-              <td>LSTM</td>
-              <td>0.52</td>
-              <td>0.51</td>
-              <td>0.65</td>
-              <td>1.11</td>
-              <td>0.89</td>
-              <td>1.22</td>
-              <td>1.23</td>
-              <td>2.37</td>
-            </tr>
-            <tr>
-              <td>Transformer</td>
-              <td>0.53</td>
-              <td>0.54</td>
-              <td>0.65</td>
-              <td>1.12</td>
-              <td>0.92</td>
-              <td>1.22</td>
-              <td>1.23</td>
-              <td>2.32</td>
-            </tr>
-            <tr>
-              <td>3D-LSTM</td>
-              <td>0.49</td>
-              <td>0.52</td>
-              <td>0.64</td>
-              <td>1.05</td>
-              <td>0.90</td>
-              <td>1.22</td>
-              <td>1.22</td>
-              <td>2.30</td>
-            </tr>
-            <tr>
-              <td>3D-ConvLSTM</td>
-              <td>0.46</td>
-              <td>0.50</td>
-              <td>0.63</td>
-              <td>1.07</td>
-              <td>0.89</td>
-              <td>1.21</td>
-              <td>1.25</td>
-              <td>2.31</td>
-            </tr>
-            <tr style="background-color: #e3f2fd;">
-              <td rowspan="2">Sentinel-2 + ADM</td>
-              <td rowspan="2">Advanced Fusion</td>
-              <td>MMGF</td>
-              <td>0.43</td>
-              <td>0.51</td>
-              <td>0.63</td>
-              <td>0.89</td>
-              <td>0.83</td>
-              <td>1.21</td>
-              <td>1.23</td>
-              <td>2.20</td>
-            </tr>
-            <tr style="background-color: #c8e6c9;">
-              <td><strong>AFF</strong></td>
-              <td><strong>0.39</strong></td>
-              <td><strong>0.46</strong></td>
-              <td><strong>0.60</strong></td>
-              <td><strong>0.83</strong></td>
-              <td><strong>0.81</strong></td>
-              <td><strong>1.19</strong></td>
-              <td><strong>1.20</strong></td>
-              <td><strong>2.13</strong></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="has-text-centered is-size-7">
-        <em>Lower RMSE is better. Best results highlighted in green.</em>
-      </p>
-    </div>
-
-    <!-- Key Findings -->
-    <div class="content">
-      <h3 class="title is-4 has-text-centered">Key Findings</h3>
-      <ul>
-        <li><strong>Spatial modeling matters:</strong> Models with 3D-CNN blocks (3D-LSTM, 3D-ConvLSTM) improve R² by ~14% 
-        compared to temporal-only models (LSTM), demonstrating the importance of capturing spatial dependencies</li>
-        <li><strong>Advanced fusion is beneficial:</strong> Attention-based Feature Fusion (AFF) achieves the best overall 
-        performance (R² = 0.86, RMSE = 0.39 t/ha for Argentina Soybean)</li>
-        <li><strong>Field-level vs pixel-level:</strong> Field-level predictions consistently achieve higher R² scores 
-        than pixel-level, as spatial averaging reduces noise</li>
-        <li><strong>Dataset variability:</strong> Performance varies significantly across countries and crops, reflecting 
-        differences in data quality and yield distributions</li>
-        <li><strong>ADM benefits depend on architecture:</strong> Simple input fusion may degrade performance with 
-        spatial models due to resolution mismatches; advanced fusion methods handle this better</li>
-      </ul>
-    </div>
-
-    <!-- Qualitative Example -->
-    <h3 class="title is-4 has-text-centered">Qualitative Results</h3>
-    <div class="columns is-centered">
-      <div class="column is-full">
-        <div class="box">
-          <img src="./static/images/prediction_quality_mx_vp_64_soybean.jpg" 
-               alt="Example prediction showing ground truth, prediction, and error maps" 
-               style="width:100%; height:auto;">
-          <p class="has-text-centered">
-            Qualitative results for a single soybean field from Argentina. Top left to bottom right: ground truth yield map, predicted yield map, prediction over target plot, input distribution over time, clipped relative pixel-wise error (100%), relative pixel-wise error (full range), histogram of predicted (blue) and target (green) values. The predictions are generated with the 3D-LSTM model.
+        <div class="content has-text-justified">
+          <p>
+            We provide comprehensive benchmark results using various deep
+            learning architectures and data fusion methods. Models are evaluated
+            at both subfield (pixel) and field levels using 10-fold stratified
+            cross-validation. Results show that incorporating spatial
+            information (3D-CNN blocks) and advanced fusion methods
+            significantly improves performance. All models are trained on each
+            country-crop combination independently.
           </p>
-
         </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- Distribution Shift -->
-<section class="section">
-  <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">Open Challenges: Distribution Shift</h2>
-    
-    <div class="content has-text-justified">
-      <p>
-        A critical challenge in crop yield prediction is <strong>severe distribution shift</strong> across years and regions 
-        due to climate variability, management practices, and environmental conditions. The YieldSAT dataset exhibits 
-        significant statistical differences in yield distributions between years and regions (p < 0.0001), making it 
-        an ideal testbed for studying model robustness under real-world distribution shift.
-      </p>
-    </div>
-
-    <!-- Distribution Shift Impact -->
-    <div class="content">
-      <h3 class="title is-4 has-text-centered">Impact on Model Performance</h3>
-      <p>
-        We evaluate models under two realistic scenarios that reflect deployment conditions:
-      </p>
-      <ul>
-        <li><strong>Leave-One-Year-Out (LOYO):</strong> Training on multiple years and predicting the next harvest 
-        (temporal shift)</li>
-        <li><strong>Leave-One-Region-Out (LORO):</strong> Training on fields from some farmers/regions and predicting 
-        yields in new regions (spatial shift)</li>
-      </ul>
-      <p>
-        Standard models exhibit severe performance degradation under distribution shift:
-      </p>
-    </div>
-
-    <div class="columns is-multiline is-centered">
-      <div class="column is-half has-text-centered">
-        <div class="box">
-          <p class="heading">Performance Drop (LOYO)</p>
-          <p class="title is-2 has-text-danger">-19 p.p.</p>
-          <p class="subtitle is-6">R² reduction compared to standard CV</p>
+        <!-- Model Architectures -->
+        <div class="content">
+          <h3 class="title is-4 has-text-centered">Evaluated Architectures</h3>
+          <div class="columns is-multiline">
+            <div class="column is-half">
+              <div class="box">
+                <h4 class="title is-6">Temporal-Only Models</h4>
+                <ul>
+                  <li>
+                    <strong>LSTM:</strong> Long Short-Term Memory for temporal
+                    modeling without spatial context
+                  </li>
+                  <li>
+                    <strong>Transformer:</strong> Attention-based temporal
+                    modeling with self-attention mechanism
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="column is-half">
+              <div class="box">
+                <h4 class="title is-6">Spatial-Temporal Models</h4>
+                <ul>
+                  <li>
+                    <strong>3D-LSTM:</strong> LSTM with 3D-CNN blocks for
+                    spatial-temporal modeling
+                  </li>
+                  <li>
+                    <strong>3D-ConvLSTM:</strong> Convolutional LSTM with
+                    built-in spatial dependencies
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="column is-half">
+              <div class="box">
+                <h4 class="title is-6">Simple Fusion</h4>
+                <ul>
+                  <li>
+                    <strong>Input Fusion:</strong> Early concatenation of all
+                    modalities via spatial/temporal repetition
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="column is-half">
+              <div class="box">
+                <h4 class="title is-6">Advanced Fusion</h4>
+                <ul>
+                  <li>
+                    <strong>MMGF:</strong> Multi-modal gated fusion with
+                    learnable gating mechanisms
+                  </li>
+                  <li>
+                    <strong>AFF:</strong> Attention-based feature fusion with
+                    learnable query for channel attention
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="column is-half has-text-centered">
-        <div class="box">
-          <p class="heading">Performance Drop (LORO)</p>
-          <p class="title is-2 has-text-danger">-22 p.p.</p>
-          <p class="subtitle is-6">R² reduction compared to standard CV</p>
-        </div>
-      </div>
-    </div>
 
-    <!-- Visualization -->
-    <div class="content">
-      <h3 class="title is-4 has-text-centered">Surface Reflectance Diversity</h3>
-      <div class="columns is-centered">
-        <div class="column is-full">
-          <div class="box">
-            <img src="./static/images/TSNE_Plot_ALL_COMBINED_S2_Crop_Country.png" 
-                 alt="t-SNE visualization of surface reflectance" 
-                 style="width:100%; height:auto;">
-            <p class="has-text-centered">
-              t-SNE visualization of Sentinel-2 surface reflectance patterns. Left: colored by country. Right: colored 
-              by crop type. Clear separation demonstrates significant diversity in input data distributions, contributing 
-              to the distribution shift challenge.
-            </p>
+        <!-- Performance Highlights -->
+        <div class="columns is-multiline is-centered">
+          <div class="column is-one-third has-text-centered">
+            <div class="box">
+              <p class="heading">Best Field-Level R²</p>
+              <p class="title">0.86</p>
+              <p class="subtitle is-6">Argentina Soybean (AFF)</p>
+            </div>
+          </div>
+          <div class="column is-one-third has-text-centered">
+            <div class="box">
+              <p class="heading">Best RMSE (t/ha)</p>
+              <p class="title">0.39</p>
+              <p class="subtitle is-6">Argentina Soybean (AFF)</p>
+            </div>
+          </div>
+          <div class="column is-one-third has-text-centered">
+            <div class="box">
+              <p class="heading">Spatial Modeling Gain</p>
+              <p class="title">~14% R²</p>
+              <p class="subtitle is-6">3D-LSTM vs LSTM</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Detailed Results Table - R² -->
+        <div class="content">
+          <h3 class="title is-4 has-text-centered">
+            Detailed Results: R² Score
+          </h3>
+          <div style="overflow-x: auto">
+            <table class="table is-fullwidth is-striped is-narrow">
+              <thead>
+                <tr>
+                  <th rowspan="2">Data Modalities</th>
+                  <th rowspan="2">Fusion Method</th>
+                  <th rowspan="2">Model</th>
+                  <th colspan="4" class="has-text-centered">Field-Level</th>
+                  <th colspan="4" class="has-text-centered">
+                    Subfield (Pixel-Level)
+                  </th>
+                </tr>
+                <tr>
+                  <th>ARG-S</th>
+                  <th>URG-S</th>
+                  <th>GER-R</th>
+                  <th>GER-W</th>
+                  <th>ARG-S</th>
+                  <th>URG-S</th>
+                  <th>GER-R</th>
+                  <th>GER-W</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td rowspan="4">Sentinel-2 Only</td>
+                  <td rowspan="4">-</td>
+                  <td>LSTM</td>
+                  <td>0.72</td>
+                  <td>0.69</td>
+                  <td>0.54</td>
+                  <td>0.55</td>
+                  <td>0.56</td>
+                  <td>0.37</td>
+                  <td>0.32</td>
+                  <td>0.30</td>
+                </tr>
+                <tr>
+                  <td>Transformer</td>
+                  <td>0.76</td>
+                  <td>0.74</td>
+                  <td>0.73</td>
+                  <td>0.62</td>
+                  <td>0.61</td>
+                  <td>0.40</td>
+                  <td>0.45</td>
+                  <td>0.33</td>
+                </tr>
+                <tr>
+                  <td>3D-LSTM</td>
+                  <td>0.81</td>
+                  <td>0.75</td>
+                  <td>0.81</td>
+                  <td>0.68</td>
+                  <td>0.64</td>
+                  <td>0.40</td>
+                  <td>0.49</td>
+                  <td>0.36</td>
+                </tr>
+                <tr>
+                  <td>3D-ConvLSTM</td>
+                  <td>0.82</td>
+                  <td>0.76</td>
+                  <td>0.82</td>
+                  <td>0.69</td>
+                  <td>0.62</td>
+                  <td>0.40</td>
+                  <td>0.48</td>
+                  <td>0.36</td>
+                </tr>
+                <tr>
+                  <td rowspan="4">Sentinel-2 + ADM</td>
+                  <td rowspan="4">Input Fusion</td>
+                  <td>LSTM</td>
+                  <td>0.76</td>
+                  <td>0.77</td>
+                  <td>0.77</td>
+                  <td>0.66</td>
+                  <td>0.63</td>
+                  <td>0.42</td>
+                  <td>0.46</td>
+                  <td>0.35</td>
+                </tr>
+                <tr>
+                  <td>Transformer</td>
+                  <td>0.74</td>
+                  <td>0.74</td>
+                  <td>0.76</td>
+                  <td>0.65</td>
+                  <td>0.60</td>
+                  <td>0.40</td>
+                  <td>0.46</td>
+                  <td>0.38</td>
+                </tr>
+                <tr>
+                  <td>3D-LSTM</td>
+                  <td>0.78</td>
+                  <td>0.76</td>
+                  <td>0.77</td>
+                  <td>0.70</td>
+                  <td>0.62</td>
+                  <td>0.40</td>
+                  <td>0.46</td>
+                  <td>0.46</td>
+                </tr>
+                <tr>
+                  <td>3D-ConvLSTM</td>
+                  <td>0.80</td>
+                  <td>0.78</td>
+                  <td>0.78</td>
+                  <td>0.68</td>
+                  <td>0.63</td>
+                  <td>0.41</td>
+                  <td>0.44</td>
+                  <td>0.38</td>
+                </tr>
+                <tr style="background-color: #e3f2fd">
+                  <td rowspan="2">Sentinel-2 + ADM</td>
+                  <td rowspan="2">Advanced Fusion</td>
+                  <td>MMGF</td>
+                  <td>0.84</td>
+                  <td>0.78</td>
+                  <td>0.80</td>
+                  <td>0.80</td>
+                  <td>0.68</td>
+                  <td>0.42</td>
+                  <td>0.46</td>
+                  <td>0.44</td>
+                </tr>
+                <tr style="background-color: #c8e6c9">
+                  <td><strong>AFF</strong></td>
+                  <td><strong>0.86</strong></td>
+                  <td><strong>0.81</strong></td>
+                  <td><strong>0.80</strong></td>
+                  <td><strong>0.81</strong></td>
+                  <td><strong>0.70</strong></td>
+                  <td><strong>0.43</strong></td>
+                  <td><strong>0.49</strong></td>
+                  <td><strong>0.48</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="has-text-centered is-size-7">
+            <em
+              >ARG-S: Argentina Soybean, URG-S: Uruguay Soybean, GER-R: Germany
+              Rapeseed, GER-W: Germany Wheat. Best results highlighted in
+              green.</em
+            >
+          </p>
+        </div>
+
+        <!-- Detailed Results Table - RMSE -->
+        <div class="content">
+          <h3 class="title is-4 has-text-centered">
+            Detailed Results: RMSE (t/ha)
+          </h3>
+          <div style="overflow-x: auto">
+            <table class="table is-fullwidth is-striped is-narrow">
+              <thead>
+                <tr>
+                  <th rowspan="2">Data Modalities</th>
+                  <th rowspan="2">Fusion Method</th>
+                  <th rowspan="2">Model</th>
+                  <th colspan="4" class="has-text-centered">Field-Level</th>
+                  <th colspan="4" class="has-text-centered">
+                    Subfield (Pixel-Level)
+                  </th>
+                </tr>
+                <tr>
+                  <th>ARG-S</th>
+                  <th>URG-S</th>
+                  <th>GER-R</th>
+                  <th>GER-W</th>
+                  <th>ARG-S</th>
+                  <th>URG-S</th>
+                  <th>GER-R</th>
+                  <th>GER-W</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td rowspan="4">Sentinel-2 Only</td>
+                  <td rowspan="4">-</td>
+                  <td>LSTM</td>
+                  <td>0.56</td>
+                  <td>0.59</td>
+                  <td>0.91</td>
+                  <td>1.27</td>
+                  <td>0.97</td>
+                  <td>1.25</td>
+                  <td>1.37</td>
+                  <td>2.47</td>
+                </tr>
+                <tr>
+                  <td>Transformer</td>
+                  <td>0.51</td>
+                  <td>0.54</td>
+                  <td>0.69</td>
+                  <td>1.17</td>
+                  <td>0.91</td>
+                  <td>1.23</td>
+                  <td>1.24</td>
+                  <td>2.41</td>
+                </tr>
+                <tr>
+                  <td>3D-LSTM</td>
+                  <td>0.49</td>
+                  <td>0.54</td>
+                  <td>0.58</td>
+                  <td>1.08</td>
+                  <td>0.90</td>
+                  <td>1.23</td>
+                  <td>1.19</td>
+                  <td>2.36</td>
+                </tr>
+                <tr>
+                  <td>3D-ConvLSTM</td>
+                  <td>0.44</td>
+                  <td>0.53</td>
+                  <td>0.57</td>
+                  <td>1.06</td>
+                  <td>0.90</td>
+                  <td>1.22</td>
+                  <td>1.20</td>
+                  <td>2.36</td>
+                </tr>
+                <tr>
+                  <td rowspan="4">Sentinel-2 + ADM</td>
+                  <td rowspan="4">Input Fusion</td>
+                  <td>LSTM</td>
+                  <td>0.52</td>
+                  <td>0.51</td>
+                  <td>0.65</td>
+                  <td>1.11</td>
+                  <td>0.89</td>
+                  <td>1.22</td>
+                  <td>1.23</td>
+                  <td>2.37</td>
+                </tr>
+                <tr>
+                  <td>Transformer</td>
+                  <td>0.53</td>
+                  <td>0.54</td>
+                  <td>0.65</td>
+                  <td>1.12</td>
+                  <td>0.92</td>
+                  <td>1.22</td>
+                  <td>1.23</td>
+                  <td>2.32</td>
+                </tr>
+                <tr>
+                  <td>3D-LSTM</td>
+                  <td>0.49</td>
+                  <td>0.52</td>
+                  <td>0.64</td>
+                  <td>1.05</td>
+                  <td>0.90</td>
+                  <td>1.22</td>
+                  <td>1.22</td>
+                  <td>2.30</td>
+                </tr>
+                <tr>
+                  <td>3D-ConvLSTM</td>
+                  <td>0.46</td>
+                  <td>0.50</td>
+                  <td>0.63</td>
+                  <td>1.07</td>
+                  <td>0.89</td>
+                  <td>1.21</td>
+                  <td>1.25</td>
+                  <td>2.31</td>
+                </tr>
+                <tr style="background-color: #e3f2fd">
+                  <td rowspan="2">Sentinel-2 + ADM</td>
+                  <td rowspan="2">Advanced Fusion</td>
+                  <td>MMGF</td>
+                  <td>0.43</td>
+                  <td>0.51</td>
+                  <td>0.63</td>
+                  <td>0.89</td>
+                  <td>0.83</td>
+                  <td>1.21</td>
+                  <td>1.23</td>
+                  <td>2.20</td>
+                </tr>
+                <tr style="background-color: #c8e6c9">
+                  <td><strong>AFF</strong></td>
+                  <td><strong>0.39</strong></td>
+                  <td><strong>0.46</strong></td>
+                  <td><strong>0.60</strong></td>
+                  <td><strong>0.83</strong></td>
+                  <td><strong>0.81</strong></td>
+                  <td><strong>1.19</strong></td>
+                  <td><strong>1.20</strong></td>
+                  <td><strong>2.13</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="has-text-centered is-size-7">
+            <em>Lower RMSE is better. Best results highlighted in green.</em>
+          </p>
+        </div>
+
+        <!-- Key Findings -->
+        <div class="content">
+          <h3 class="title is-4 has-text-centered">Key Findings</h3>
+          <ul>
+            <li>
+              <strong>Spatial modeling matters:</strong> Models with 3D-CNN
+              blocks (3D-LSTM, 3D-ConvLSTM) improve R² by ~14% compared to
+              temporal-only models (LSTM), demonstrating the importance of
+              capturing spatial dependencies
+            </li>
+            <li>
+              <strong>Advanced fusion is beneficial:</strong> Attention-based
+              Feature Fusion (AFF) achieves the best overall performance (R² =
+              0.86, RMSE = 0.39 t/ha for Argentina Soybean)
+            </li>
+            <li>
+              <strong>Field-level vs pixel-level:</strong> Field-level
+              predictions consistently achieve higher R² scores than
+              pixel-level, as spatial averaging reduces noise
+            </li>
+            <li>
+              <strong>Dataset variability:</strong> Performance varies
+              significantly across countries and crops, reflecting differences
+              in data quality and yield distributions
+            </li>
+            <li>
+              <strong>ADM benefits depend on architecture:</strong> Simple input
+              fusion may degrade performance with spatial models due to
+              resolution mismatches; advanced fusion methods handle this better
+            </li>
+          </ul>
+        </div>
+
+        <!-- Qualitative Example -->
+        <h3 class="title is-4 has-text-centered">Qualitative Results</h3>
+        <div class="columns is-centered">
+          <div class="column is-full">
+            <div class="box">
+              <img
+                src="./static/images/prediction_quality_mx_vp_64_soybean.jpg"
+                alt="Example prediction showing ground truth, prediction, and error maps"
+                style="width: 100%; height: auto"
+              />
+              <p class="has-text-centered">
+                Qualitative results for a single soybean field from Argentina.
+                Top left to bottom right: ground truth yield map, predicted
+                yield map, prediction over target plot, input distribution over
+                time, clipped relative pixel-wise error (100%), relative
+                pixel-wise error (full range), histogram of predicted (blue) and
+                target (green) values. The predictions are generated with the
+                3D-LSTM model.
+              </p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- Research Directions -->
-    <div class="content">
-      <h3 class="title is-4 has-text-centered">Future Research Directions</h3>
-      <p>
-        YieldSAT enables research on several important open challenges:
-      </p>
-      <ul>
-        <li><strong>Robust models:</strong> Developing architectures that maintain performance under distribution shift</li>
-        <li><strong>Domain adaptation:</strong> Transfer learning methods to adapt models from one region/year to another</li>
-        <li><strong>Foundation models:</strong> Pre-training on large-scale Earth observation data for improved generalization</li>
-        <li><strong>Uncertainty quantification:</strong> Reliable confidence estimates for predictions under shift</li>
-        <li><strong>Physics-informed approaches:</strong> Incorporating crop growth models and physical constraints</li>
-        <li><strong>Explainability:</strong> Understanding what models learn and why they fail under distribution shift</li>
-      </ul>
-    </div>
-  </div>
-</section>
+    <!-- Distribution Shift -->
+    <section class="section">
+      <div class="container is-max-desktop">
+        <h2 class="title is-3 has-text-centered">
+          Open Challenges: Distribution Shift
+        </h2>
 
-<!-- BibTeX Citation -->
-<section class="section" id="BibTeX">
-  <div class="container is-max-desktop content">
-    <h2 class="title">BibTeX</h2>
-    <pre><code>@inproceedings{anonymous2026yieldsat,
+        <div class="content has-text-justified">
+          <p>
+            A critical challenge in crop yield prediction is
+            <strong>severe distribution shift</strong> across years and regions
+            due to climate variability, management practices, and environmental
+            conditions. The YieldSAT dataset exhibits significant statistical
+            differences in yield distributions between years and regions (p <
+            0.0001), making it an ideal testbed for studying model robustness
+            under real-world distribution shift.
+          </p>
+        </div>
+
+        <!-- Distribution Shift Impact -->
+        <div class="content">
+          <h3 class="title is-4 has-text-centered">
+            Impact on Model Performance
+          </h3>
+          <p>
+            We evaluate models under two realistic scenarios that reflect
+            deployment conditions:
+          </p>
+          <ul>
+            <li>
+              <strong>Leave-One-Year-Out (LOYO):</strong> Training on multiple
+              years and predicting the next harvest (temporal shift)
+            </li>
+            <li>
+              <strong>Leave-One-Region-Out (LORO):</strong> Training on fields
+              from some farmers/regions and predicting yields in new regions
+              (spatial shift)
+            </li>
+          </ul>
+          <p>
+            Standard models exhibit severe performance degradation under
+            distribution shift:
+          </p>
+        </div>
+
+        <div class="columns is-multiline is-centered">
+          <div class="column is-half has-text-centered">
+            <div class="box">
+              <p class="heading">Performance Drop (LOYO)</p>
+              <p class="title is-2 has-text-danger">-19 p.p.</p>
+              <p class="subtitle is-6">R² reduction compared to standard CV</p>
+            </div>
+          </div>
+          <div class="column is-half has-text-centered">
+            <div class="box">
+              <p class="heading">Performance Drop (LORO)</p>
+              <p class="title is-2 has-text-danger">-22 p.p.</p>
+              <p class="subtitle is-6">R² reduction compared to standard CV</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Visualization -->
+        <div class="content">
+          <h3 class="title is-4 has-text-centered">
+            Surface Reflectance Diversity
+          </h3>
+          <div class="columns is-centered">
+            <div class="column is-full">
+              <div class="box">
+                <img
+                  src="./static/images/TSNE_Plot_ALL_COMBINED_S2_Crop_Country.png"
+                  alt="t-SNE visualization of surface reflectance"
+                  style="width: 100%; height: auto"
+                />
+                <p class="has-text-centered">
+                  t-SNE visualization of Sentinel-2 surface reflectance
+                  patterns. Left: colored by country. Right: colored by crop
+                  type. Clear separation demonstrates significant diversity in
+                  input data distributions, contributing to the distribution
+                  shift challenge.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Research Directions -->
+        <div class="content">
+          <h3 class="title is-4 has-text-centered">
+            Future Research Directions
+          </h3>
+          <p>YieldSAT enables research on several important open challenges:</p>
+          <ul>
+            <li>
+              <strong>Robust models:</strong> Developing architectures that
+              maintain performance under distribution shift
+            </li>
+            <li>
+              <strong>Domain adaptation:</strong> Transfer learning methods to
+              adapt models from one region/year to another
+            </li>
+            <li>
+              <strong>Foundation models:</strong> Pre-training on large-scale
+              Earth observation data for improved generalization
+            </li>
+            <li>
+              <strong>Uncertainty quantification:</strong> Reliable confidence
+              estimates for predictions under shift
+            </li>
+            <li>
+              <strong>Physics-informed approaches:</strong> Incorporating crop
+              growth models and physical constraints
+            </li>
+            <li>
+              <strong>Explainability:</strong> Understanding what models learn
+              and why they fail under distribution shift
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- BibTeX Citation -->
+    <section class="section" id="BibTeX">
+      <div class="container is-max-desktop content">
+        <h2 class="title">BibTeX</h2>
+        <pre><code>@inproceedings{miranda_2026_yieldsat,
   title={YieldSAT: A Multimodal Benchmark Dataset for High-Resolution Crop Yield Prediction},
-  author={Anonymous},
-  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  author = {Miranda, Miro and Pathak, Deepak and Helber, Patrick and Bischke, Benjamin and Najjar, Hiba and Mena, Francisco and Sanchez, Cristhian and Pai, Akshay and Arenas, Diego and Toro, Matias Valdenegro and Charfualan, Marcela and Nuske, Marlon and Dengel, Andreas},
+  booktitle={Proceedings of the Computer Vision and Pattern Recognition Conference (CVPR)},
   year={2026}
 }</code></pre>
-  </div>
-</section>
+      </div>
+    </section>
 
-<!-- Footer -->
-<footer class="footer">
-  <div class="container">
-    <div class="content has-text-centered">
-      <p style="color: #666;">
-        Website template adapted from 
-        <a href="https://nerfies.github.io" target="_blank">Nerfies</a>.
-      </p>
-    </div>
-  </div>
-</footer>
-
-</body>
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="content has-text-centered">
+          <p style="color: #666">
+            Website template adapted from
+            <a href="https://nerfies.github.io" target="_blank">Nerfies</a>.
+          </p>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>
