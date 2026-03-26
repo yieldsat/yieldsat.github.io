@@ -253,12 +253,93 @@
                       class="external-link button is-normal is-rounded is-dark"
                     >
                       <span class="icon">
-                        <img src="static/images/colab.svg" />
+                        <img src="static/images/jupyter.png" />
                       </span>
                       <span>&nbsp;Notebook</span>
                     </a>
                   </span>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Data Formats -->
+    <section class="section">
+      <div class="container is-max-desktop">
+        <h2 class="title is-3 has-text-centered">Dataset Formats</h2>
+
+        <div class="content has-text-justified">
+          <p>
+            YieldSAT is available in two formats to accommodate different
+            research needs and model architectures:
+          </p>
+        </div>
+
+        <div class="columns">
+          <div class="column is-half">
+            <div class="box" style="height: 100%">
+              <h3 class="title is-5">
+                <span class="icon-text">
+                  <span class="icon has-text-info"
+                    ><i class="fas fa-rocket"></i
+                  ></span>
+                  <span>Preprocessed Format (ML-Ready)</span>
+                </span>
+              </h3>
+              <div class="content">
+                <ul>
+                  <li><strong>Format:</strong> Xarray dataset</li>
+                  <li>
+                    <strong>Time Steps:</strong> 24 uniformly sampled time steps
+                  </li>
+                  <li>
+                    <strong>Fusion Strategy:</strong> Input fusion via
+                    concatenation and spatial/temporal repetition
+                  </li>
+                  <li>
+                    <strong>Use Case:</strong> Rapid prototyping, baseline
+                    models, quick experimentation, and fast training
+                  </li>
+                  <li>
+                    <strong>Advantages:</strong> Ready for immediate training,
+                    standardized format
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="column is-half">
+            <div class="box" style="height: 100%">
+              <h3 class="title is-5">
+                <span class="icon-text">
+                  <span class="icon has-text-warning"
+                    ><i class="fas fa-tools"></i
+                  ></span>
+                  <span>Flexible Format</span>
+                </span>
+              </h3>
+              <div class="content">
+                <ul>
+                  <li>
+                    <strong>Format:</strong> Individual files per modality with
+                    metadata
+                  </li>
+                  <li>
+                    <strong>Modalities:</strong> Separate files for Sentinel-2,
+                    weather, soil, topography, yield
+                  </li>
+                  <li>
+                    <strong>Use Case:</strong> Advanced fusion methods, custom
+                    preprocessing, novel architectures
+                  </li>
+                  <li>
+                    <strong>Advantages:</strong> Full flexibility, preserve
+                    original temporal, spatial, and spectral resolution
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
@@ -295,27 +376,20 @@
             <h2 class="title is-3">Abstract</h2>
             <div class="content has-text-justified">
               <p>
-                Crop yield prediction requires substantial data to train
-                data-driven models. However, creating yield prediction datasets
-                is constrained by high acquisition costs, heterogeneous data
-                quality, and data privacy regulations. Consequently, existing
-                datasets are scarce, low in quality, or limited to regional
-                levels or single crop types. In this work, we release
-                <strong>YieldSAT</strong>, a large, high-quality, and multimodal
-                dataset for high-resolution crop yield prediction. YieldSAT
-                spans various climate zones across two continents and multiple
-                countries, including Argentina, Brazil, Uruguay, and Germany.
-                The dataset was collected between 2016 and 2024 and comprises
-                four major crop types—corn, rapeseed, soybeans, and wheat—across
-                2,176 curated fields. In total, over 12.2 million yield samples
-                are available, each with a spatial resolution of 10 m. Each
-                field is paired with multispectral satellite imagery, resulting
-                in 113,630 labeled satellite images, complemented by auxiliary
-                environmental data. We demonstrate the potential of large-scale
-                and high-resolution crop yield prediction as an image regression
-                task by comparing various deep learning models and data fusion
-                architectures. Furthermore, we highlight open challenges arising
-                from severe distribution shifts in the ground truth data.
+                Crop yield prediction requires substantial data to train scalable models. However, creating yield prediction 
+                datasets is constrained by high acquisition costs, heterogeneous data quality, and data privacy regulations. 
+                Consequently, existing datasets are scarce, low in quality, or limited to regional levels or single crop types, 
+                hindering the development of scalable data-driven solutions. In this work, we release <strong>YieldSAT</strong>, 
+                a large, high-quality, and multimodal dataset for high-resolution crop yield prediction. \textit{YieldSAT} 
+                spans various climate zones across multiple countries, including Argentina, Brazil, Uruguay, and Germany, and 
+                includes major crop types, including corn, rapeseed, soybeans, and wheat, across 2,176 expert-curated fields. 
+                In total, over 12.2 million yield samples are available, each with a spatial resolution of $\SI{10}{m}$. 
+                Each field is paired with multispectral satellite imagery, resulting in 113,630 labeled satellite images, 
+                complemented by auxiliary environmental data. We demonstrate the potential of large-scale and high-resolution 
+                crop yield prediction as an pixel regression task by comparing various deep learning models and data fusion 
+                architectures. Furthermore, we highlight open challenges arising from severe distribution shifts in the ground 
+                truth data under real-world conditions. To mitigate this, we explore a domain-informed Deep Ensemble approach 
+                that exhibits significant performance gains.
               </p>
             </div>
           </div>
@@ -390,7 +464,7 @@
                 <td><strong>✓</strong></td>
                 <td><strong>10 m</strong></td>
                 <td><strong>5 days</strong></td>
-                <td><strong>>70</strong></td>
+                <td><strong>72</strong></td>
                 <td><strong>✓</strong></td>
               </tr>
             </tbody>
@@ -554,7 +628,7 @@
           <div class="column is-one-quarter has-text-centered">
             <div class="box">
               <p class="heading">Features</p>
-              <p class="title">>70</p>
+              <p class="title">72</p>
             </div>
           </div>
         </div>
@@ -1107,87 +1181,6 @@
                   <li>
                     <strong>Field Boundaries:</strong> Manually digitized
                     polygons for each field
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Data Formats -->
-    <section class="section">
-      <div class="container is-max-desktop">
-        <h2 class="title is-3 has-text-centered">Dataset Formats</h2>
-
-        <div class="content has-text-justified">
-          <p>
-            YieldSAT is available in two formats to accommodate different
-            research needs and model architectures:
-          </p>
-        </div>
-
-        <div class="columns">
-          <div class="column is-half">
-            <div class="box" style="height: 100%">
-              <h3 class="title is-5">
-                <span class="icon-text">
-                  <span class="icon has-text-info"
-                    ><i class="fas fa-rocket"></i
-                  ></span>
-                  <span>Preprocessed Format (ML-Ready)</span>
-                </span>
-              </h3>
-              <div class="content">
-                <ul>
-                  <li><strong>Format:</strong> Xarray dataset</li>
-                  <li>
-                    <strong>Time Steps:</strong> 24 uniformly sampled time steps
-                  </li>
-                  <li>
-                    <strong>Fusion Strategy:</strong> Input fusion via
-                    concatenation and spatial/temporal repetition
-                  </li>
-                  <li>
-                    <strong>Use Case:</strong> Rapid prototyping, baseline
-                    models, quick experimentation
-                  </li>
-                  <li>
-                    <strong>Advantages:</strong> Ready for immediate training,
-                    standardized format
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="column is-half">
-            <div class="box" style="height: 100%">
-              <h3 class="title is-5">
-                <span class="icon-text">
-                  <span class="icon has-text-warning"
-                    ><i class="fas fa-tools"></i
-                  ></span>
-                  <span>Flexible Format</span>
-                </span>
-              </h3>
-              <div class="content">
-                <ul>
-                  <li>
-                    <strong>Format:</strong> Individual files per modality with
-                    metadata
-                  </li>
-                  <li>
-                    <strong>Modalities:</strong> Separate files for Sentinel-2,
-                    weather, soil, topography, yield
-                  </li>
-                  <li>
-                    <strong>Use Case:</strong> Advanced fusion methods, custom
-                    preprocessing, novel architectures
-                  </li>
-                  <li>
-                    <strong>Advantages:</strong> Full flexibility, preserve
-                    original temporal resolution
                   </li>
                 </ul>
               </div>
