@@ -380,10 +380,10 @@
                 datasets is constrained by high acquisition costs, heterogeneous data quality, and data privacy regulations. 
                 Consequently, existing datasets are scarce, low in quality, or limited to regional levels or single crop types, 
                 hindering the development of scalable data-driven solutions. In this work, we release <strong>YieldSAT</strong>, 
-                a large, high-quality, and multimodal dataset for high-resolution crop yield prediction. \textit{YieldSAT} 
+                a large, high-quality, and multimodal dataset for high-resolution crop yield prediction. YieldSAT
                 spans various climate zones across multiple countries, including Argentina, Brazil, Uruguay, and Germany, and 
                 includes major crop types, including corn, rapeseed, soybeans, and wheat, across 2,176 expert-curated fields. 
-                In total, over 12.2 million yield samples are available, each with a spatial resolution of $\SI{10}{m}$. 
+                In total, over 12.2 million yield samples are available, each with a spatial resolution of 10 m. 
                 Each field is paired with multispectral satellite imagery, resulting in 113,630 labeled satellite images, 
                 complemented by auxiliary environmental data. We demonstrate the potential of large-scale and high-resolution 
                 crop yield prediction as an pixel regression task by comparing various deep learning models and data fusion 
@@ -837,7 +837,26 @@
           </p>
         </div>
 
-        <!-- Crop-Specific Parameters -->
+          <!-- Data Quality Per Country -->
+        <div class="columns is-centered">
+          <div class="column is-full">
+            <div class="box">
+              <h4 class="subtitle is-5 has-text-centered">
+                Field quality labels per country
+              </h4>
+              <img
+                src="./static/images/quality_labels_by_country(1).png"
+                alt="Yield map quality label per country"
+                style="width: 100%; height: auto"
+              />
+              <p class="has-text-centered">
+                Yield map quality distribution per country. Yield maps were manually labeled, following a stringent guideline.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Crop-Specific Parameters
         <div class="content">
           <h3 class="title is-4 has-text-centered">Crop-Specific Parameters</h3>
           <table class="table is-fullwidth is-striped">
@@ -873,7 +892,7 @@
           </table>
         </div>
       </div>
-    </section>
+    </section> -->
 
     <!-- Sentinel-2 Data -->
     <section class="section">
