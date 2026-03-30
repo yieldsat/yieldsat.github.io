@@ -325,6 +325,7 @@ footer {
 
 .benchmark-table .sticky-col {
     position: sticky;
+    box-sizing: border-box;
     background: #fff;
     background-clip: padding-box;
     white-space: nowrap;
@@ -375,4 +376,32 @@ footer {
 
 .benchmark-table th.sticky-col {
     white-space: nowrap;
+}
+
+.benchmark-table-home {
+    --sticky-col-1-width: 8.5rem;
+    --sticky-col-2-width: 7.75rem;
+    --sticky-col-3-width: 8.5rem;
+}
+
+.benchmark-table-home .sticky-col-3 {
+    box-shadow: 2px 0 0 #dbdbdb;
+}
+
+.benchmark-results-link {
+    margin-top: 1rem;
+}
+
+.result-page-container {
+    max-width: min(1800px, calc(100vw - 3rem));
+}
+
+.results-page .benchmark-table-wrapper.is-scrollable::after {
+    background: linear-gradient(to left, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0));
+}
+
+@media (max-width: 768px) {
+    .result-page-container {
+        max-width: calc(100vw - 1.5rem);
+    }
 }
