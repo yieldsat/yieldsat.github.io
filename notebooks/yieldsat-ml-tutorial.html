@@ -14585,11 +14585,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 CVPR 2026 &mdash; <a href="https://yieldsat.github.io/">Project Page</a></p>
 </blockquote>
 <p>to illustrate is ML-readiness. Using the preprocessed <a href="https://docs.xarray.dev/en/latest/user-guide/data-structures.html#dataset"><code>xarray.Dataset</code></a> datastructure, we can build fast and flexible models on multimodal input data.</p>
-<p>
-<a href="./yieldsat-ml-tutorial.ipynb" download>
-  Download Notebook
-</a>
-</p>
+
 </div>
 </div>
 </div>
@@ -14625,18 +14621,6 @@ CVPR 2026 &mdash; <a href="https://yieldsat.github.io/">Project Page</a></p>
 <h2 id="1.-xarray-for-ML-Development">1. <code>xarray</code> for ML Development<a class="anchor-link" href="#1.-xarray-for-ML-Development">&#182;</a></h2><p>The preprocessed YieldSAT release is the model-ready version of the dataset. It is stored as an <a href="https://docs.xarray.dev/en/latest/user-guide/data-structures.html#dataset"><code>xarray.Dataset</code></a>, which makes it convenient to train machine learning models, inspect metadata, and select subsets by country, crop, year, farm, or field.</p>
 <p>In this format, each valid 10 m pixel is represented as a season-aligned temporal sample. The temporal representation contains <strong>24 time steps</strong> spanning a two-calendar-year window defined relative to seeding and harvesting, such that the harvest month always lies in the second year. For each time step, the selected observation corresponds to the least-cloudy available image, and observations outside the growing season are masked. All input modalities are aligned via concatenation and temporal and spatial repetition (input fusion), resulting in a standardized tensor representation.</p>
 <p>We provide detailed information about the <code>xarray</code> data structure in the data overview <a href="&quot;./notebooks/yieldsat-overview-notebook.html&quot;"><code>Notebook</code></a>.</p>
-
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="3.-Build-grouped-split-using-field_id">3. Build grouped split using field_id<a class="anchor-link" href="#3.-Build-grouped-split-using-field_id">&#182;</a></h3><p>Here we load the same dataset to assemble index-level mapping from <code>field_id</code>, then create an 80/20 train/test split where fields are disjoint.</p>
 
 </div>
 </div>
@@ -16576,7 +16560,7 @@ Available crops after filterin:
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Group-K-Fold-Cross-Validation">Group-K-Fold Cross-Validation<a class="anchor-link" href="#Group-K-Fold-Cross-Validation">&#182;</a></h3><p>We create a simple dataset splitting for CV training by ensuring that pixels (index) from the same field are either in train or val to avoid information leakage. We can create more advances splittings (e.g., stratifying by region, leave-one-year-out, or leave-one-region-out etc.), to ensure a more realistic training setup.</p>
+<h3 id="3.-Group-K-Fold-Cross-Validation">3. Group-K-Fold Cross-Validation<a class="anchor-link" href="#3.-Group-K-Fold-Cross-Validation">&#182;</a></h3><p>We create a simple dataset splitting for CV training by ensuring that pixels (index) from the same field are either in train or val to avoid information leakage. We can create more advances splittings (e.g., stratifying by region, leave-one-year-out, or leave-one-region-out etc.), to ensure a more realistic training setup.</p>
 
 </div>
 </div>
@@ -16678,7 +16662,7 @@ Available crops after filterin:
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="4.-LSTM-Model-and-Training">4. LSTM Model and Training<a class="anchor-link" href="#4.-LSTM-Model-and-Training">&#182;</a></h2><p>We define a minimal Pytorch LSTM model and a training pipeline. We will train the model on a Group-K-Fold cross-validation split and evaluate on a seperate validation set using common regression metrics.</p>
+<h2 id="4.-LSTM-Model-and-Training">4. LSTM Model and Training<a class="anchor-link" href="#4.-LSTM-Model-and-Training">&#182;</a></h2><p>We define a minimal Pytorch LSTM model and a training pipeline. We will train the model on a Group-K-Fold cross-validation split and evaluate on a seperate validation set using common regression metrics. You can replace it with your model of choice.</p>
 
 </div>
 </div>
